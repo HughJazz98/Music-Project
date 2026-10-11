@@ -1,0 +1,32 @@
+{
+ "on broken glass|chimaira": {
+  "releaseDate": "2009-04-21",
+  "genre": "metal",
+  "genreFrom": "recording"
+ },
+ "iron jawed angel|rotting out": {
+  "releaseDate": "2011-05-25",
+  "genre": null,
+  "genreFrom": null
+ },
+ "bite down|desolated": {
+  "releaseDate": "2025-05-30",
+  "genre": "beatdown hardcore",
+  "genreFrom": "artist"
+ },
+ "the most high|terror": {
+  "releaseDate": "2013-04-09",
+  "genre": "hardcore punk",
+  "genreFrom": "artist"
+ },
+ "wake up|bracewar": {
+  "releaseDate": "2007-08-07",
+  "genre": "hardcore punk",
+  "genreFrom": "artist"
+ },
+ "empty hearts|as i lay dying": {
+  "releaseDate": "2005-06-14",
+  "genre": "metal",
+  "genreFrom": "recording"
+ }
+}

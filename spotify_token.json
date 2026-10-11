@@ -1,0 +1,8 @@
+{
+ "access_token": "BQDCp6L7Z7x7WM1-OH7Av3RFD01_gEg5gYPqI6iSY4IPWjUratEV4OoYPc9xKBroPZZuqs14291XHC57g4tSmxibJONX-Ok4dkDYgp3UHXBkWXv2K327NGoZq6C55OUCdiP2bSODW5HaDnyuCKQhPAHFPpcureD2DMs86YLaT4iuF1It8dqu54S2EgjOHWT4bAbTgbhasINy8UzITq0IdhsR-ASrcmJNisFDAsT79CNSjZy02GClznUmmVqVy_g_d2lafLrvnmr-8GVAKYi_3Zxbw7cv5v9xy6O_7KtEcQXFmXKec_hT7KIX1sdOOw",
+ "token_type": "Bearer",
+ "expires_in": 3600,
+ "scope": "playlist-read-private playlist-read-collaborative user-modify-playback-state playlist-modify-private playlist-modify-public user-read-playback-state user-read-private",
+ "refresh_token": "AQDvygeVlUD0WPzlQAK1WdkQhBVvJ3TsFWylVUJqYIBWIgmj7hVEP61qgNP9ab4HS0U6cH1kYOMqqrauRIVYeRSdXiXnIzW2NvJA_mVWlmHA7g1OyhxbrHjD_jnHSAib6yc",
+ "expires_at": 1791746238.086418
+}

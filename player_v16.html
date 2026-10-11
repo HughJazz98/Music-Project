@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pandora Mirror</title>
+<style>
+ /* All colours and sizes live here so the look can be changed in one place. */
+ @property --bg{syntax:'<color>';inherits:true;initial-value:#101012}
+ @property --card{syntax:'<color>';inherits:true;initial-value:#1a1a1e}
+ @property --line{syntax:'<color>';inherits:true;initial-value:#2a2a30}
+ @property --acc{syntax:'<color>';inherits:true;initial-value:#7aa2ff}
+ @property --glow{syntax:'<color>';inherits:true;initial-value:rgba(60,70,110,.25)}
+ :root{--bg:#101012;--card:#1a1a1e;--line:#2a2a30;--fg:#ececf0;--dim:#9a9aa6;--acc:#7aa2ff;--onacc:#0b1020;--glow:rgba(60,70,110,.25);--chip:#26262c;--radius:14px;
+  transition:--bg 1.4s ease,--card 1.4s ease,--line 1.4s ease,--acc 1.4s ease,--glow 1.4s ease}
+ *{box-sizing:border-box}
+ html{scroll-behavior:smooth}
+ body{overflow-x:clip}
+ #np{will-change:opacity,transform}
+ .js .rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+ .js .rv.in{opacity:1;transform:none}
+ #mini{position:fixed;top:0;left:0;right:0;z-index:15;display:flex;justify-content:center;transform:translateY(-110%);transition:transform .5s cubic-bezier(.2,.7,.2,1);pointer-events:none;background:rgba(16,16,18,.8);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+ #mini.show{transform:none;pointer-events:auto}
+ #mini .in{width:min(900px,100%);display:flex;align-items:center;gap:12px;padding:8px 16px}
+ #mini img,#mini .ph{width:40px;height:40px;border-radius:5px;object-fit:cover;flex:none;cursor:pointer;font-size:.6rem}
+ #mini .x{flex:1;min-width:0;cursor:pointer} #mini .n{font-size:.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} #mini .m{font-size:.75rem;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ #mini .ctl{width:38px;height:38px} #mini .ctl svg{width:18px;height:18px} #mini .ctl.big{width:42px;height:42px} #mini .ctl.big svg{width:20px;height:20px}
+ @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.cv,.cv .ov,.cv .ovb,.js .rv,#mini{transition:none}}
+ body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,sans-serif;display:flex;justify-content:center}
+ main{width:min(820px,100%);padding:24px 16px 56px}
+ button{font:inherit;color:var(--fg);border:0;background:#2a2a30;cursor:pointer}
+ button:hover:not(:disabled){background:#383840}
+ button:disabled{opacity:.45;cursor:default}
+ a{color:var(--acc);text-decoration:none}
+ #note{display:none;position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:30;width:min(640px,92vw);margin:0;box-shadow:0 4px 18px #0008;padding:9px 12px;border-radius:9px;background:#3a2326;color:#ffb4b4;font-size:.88rem}
+
+ /* ---------- Now Playing: fills the whole screen; everything else is below the fold ---------- */
+ main{width:min(900px,100%);padding:0 16px 56px}
+ #np{height:100vh;height:100dvh;min-height:440px;display:flex;flex-direction:column;align-items:center;padding:18px 0 10px;position:relative}
+ #np::before{content:'';position:absolute;top:-6%;bottom:22%;left:50%;width:100vw;margin-left:-50vw;background:radial-gradient(ellipse at 50% 42%,var(--glow),transparent 66%);z-index:-1;pointer-events:none}
+ #flow{flex:1 1 auto;min-height:0;width:100vw;max-width:100vw;position:relative;perspective:1200px;cursor:pointer;--cv:clamp(150px,min(46vh,84vw),420px);overflow:hidden}
+ .cv{position:absolute;left:50%;top:46%;width:var(--cv);height:var(--cv);margin:calc(var(--cv)/-2) 0 0 calc(var(--cv)/-2);border-radius:6px;background:#26262c;
+  transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .6s,filter .6s;will-change:transform;box-shadow:0 10px 30px #0009}
+ .cv.enter{transform:translateX(calc(var(--cv) * .7)) scale(.8);opacity:0}
+ .cv.p0{transform:translateX(0) rotateY(0) scale(1);z-index:5;opacity:1}
+ .cv.p1{transform:translateX(calc(var(--cv) * -.58 * var(--k,1))) rotateY(52deg) scale(.8);z-index:4;opacity:.92;filter:brightness(.7)}
+ .cv.p2{transform:translateX(calc(var(--cv) * -.92 * var(--k,1))) rotateY(52deg) scale(.64);z-index:3;opacity:.75;filter:brightness(.5)}
+ .cv.gone{transform:translateX(calc(var(--cv) * -1.15 * var(--k,1))) rotateY(52deg) scale(.5);z-index:1;opacity:0;pointer-events:none}
+ .ph{display:flex;align-items:center;justify-content:center;color:var(--dim);font-size:1.1rem;text-align:center;background:linear-gradient(135deg,#2c2c34,#1d1d22)}
+ .cv .rf{position:absolute;left:0;top:calc(100% + 3px);width:100%;height:100%;transform:scaleY(-1);pointer-events:none;overflow:hidden;border-radius:6px;-webkit-mask-image:linear-gradient(to top,rgba(0,0,0,.2),transparent 42%);mask-image:linear-gradient(to top,rgba(0,0,0,.2),transparent 42%)}
+ .cv .rf>*{width:100%;height:100%;object-fit:cover;display:block}
+ .cv.p0{cursor:pointer}
+ .cv .face{width:100%;height:100%;border-radius:6px;object-fit:cover;display:block;background:#26262c}
+ .cv.p0:hover{transform:translateX(0) rotateY(0) scale(1.02);filter:brightness(1.07)}
+ .cv .ov{position:absolute;inset:0;border-radius:6px;display:flex;align-items:center;justify-content:center;opacity:0;background:rgba(0,0,0,.26);transition:opacity .5s ease;pointer-events:none}
+ .cv.p0:hover .ov{opacity:1}
+ .cv.p0:hover .ovb{transform:scale(1.06)}
+ .cv:not(.p0) .ov{display:none}
+ .cv .ovb{width:76px;height:76px;border-radius:50%;padding:0;display:inline-flex;align-items:center;justify-content:center;background:rgba(18,18,22,.55);color:#fff;pointer-events:none;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:transform .4s ease,background .4s ease}
+ .cv .ovb svg{width:34px;height:34px;fill:currentColor}
+ #flow .artsrc{position:absolute;right:4px;bottom:2px;font-size:.68rem;color:var(--dim);opacity:.7;z-index:6}
+ #meta{flex:none;width:100%;text-align:center;padding:8px 8px 0}
+ #title{font-size:clamp(1.25rem,3.4vh,1.8rem);font-weight:700;line-height:1.15;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+ #artist{margin-top:.3rem;font-size:clamp(.95rem,2.4vh,1.15rem)}
+ #albumline{margin-top:.15rem;color:var(--dim);display:flex;gap:10px;align-items:baseline;justify-content:center;flex-wrap:wrap;font-size:clamp(.85rem,2.1vh,1rem)}
+ #year{font-size:.78rem;padding:2px 9px;border-radius:99px;background:var(--chip)}
+ #year:empty{display:none}
+ .progress{flex:none;width:min(560px,100%);margin-top:clamp(8px,2vh,18px);display:flex;align-items:center;gap:10px;font-size:.78rem;color:var(--dim);font-variant-numeric:tabular-nums}
+ .progress .t{width:3.2em;flex:none}
+ #el{text-align:right}
+ #du{text-align:left;background:none;padding:0;color:var(--dim);font-size:.78rem;font-variant-numeric:tabular-nums;border-radius:4px}
+ #du:hover:not(:disabled){background:none;color:var(--fg)}
+ .track{flex:1;height:5px;background:#2e2e35;border-radius:9px;overflow:hidden}
+ #fill{height:100%;width:0;background:var(--acc)}
+ .ctrls{flex:none;display:flex;gap:14px;align-items:center;margin-top:clamp(8px,2vh,16px)}
+ .ctl{width:46px;height:46px;border-radius:50%;padding:0;display:inline-flex;align-items:center;justify-content:center;background:#26262c}
+ .ctl svg{width:22px;height:22px;fill:currentColor}
+ .ctl svg.line{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+ .ctl.big{width:60px;height:60px;background:var(--acc);color:var(--onacc)}
+ .ctl.big:hover:not(:disabled){background:#93b3ff}
+ .ctl.big svg{width:28px;height:28px}
+ #more{flex:none;margin-top:6px;background:none;padding:2px 14px;color:var(--dim);opacity:.7;border-radius:99px}
+ #more svg{width:22px;height:22px;display:block;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+ #more:hover:not(:disabled){background:none;color:var(--fg);opacity:1}
+ @media(max-height:560px){#more{display:none}}
+
+ /* history list */
+ #hist{position:fixed;inset:0;z-index:20;background:#000b;display:none;align-items:flex-end;justify-content:center}
+ #hist.open{display:flex}
+ #histbox{width:min(720px,100%);max-height:86vh;background:var(--card);border:1px solid var(--line);border-radius:16px 16px 0 0;display:flex;flex-direction:column}
+ #histhead{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--line);font-weight:600}
+ #histhead button{width:34px;height:34px;border-radius:50%;padding:0;display:inline-flex;align-items:center;justify-content:center}
+ #histhead svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round}
+ #histlist{overflow-y:auto;padding:4px 18px 18px}
+ .hr{display:flex;gap:12px;align-items:center;padding:9px 0;border-top:1px solid var(--line)} .hr:first-child{border-top:0}
+ .hr img,.hr .ph{width:52px;height:52px;border-radius:6px;flex:none;object-fit:cover;background:#26262c;font-size:.6rem}
+ .hr .x{min-width:0;flex:1} .hr .n{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.95rem}
+ .hr .m{font-size:.78rem;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .hr.now .n{color:var(--acc);font-weight:600}
+ .hr .badge{font-size:.68rem;padding:2px 8px;border-radius:99px;background:#1e2c4d;color:#cfdcff;flex:none}
+
+ /* below the fold */
+ #below{padding-top:6px}
+  h2{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);margin:28px 0 8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+ h2 i{font-style:normal;text-transform:none;letter-spacing:0;opacity:.7}
+ .svc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+ .line{font-size:.9rem} .sub{color:var(--dim);font-size:.8rem;margin-top:6px} .warn{color:#ffcf99;font-size:.82rem;margin-top:8px}
+ .empty{color:var(--dim);font-size:.9rem}
+ .kv{display:flex;gap:10px;align-items:baseline;padding:7px 0;border-top:1px solid var(--line);font-size:.92rem} .kv:first-child{border-top:0}
+ .kv .k{width:120px;flex:none;color:var(--dim);font-size:.8rem} .kv .v{flex:1;min-width:0;overflow-wrap:anywhere} .kv .v.ph{color:var(--dim);font-style:italic}
+ .kv .tag{font-size:.7rem;color:var(--dim);opacity:.75;white-space:nowrap}
+ .wrap{display:flex;flex-wrap:wrap;gap:6px}
+ .chip{font-size:.85rem;padding:.4rem .9rem;border-radius:99px;background:var(--chip);color:var(--fg)}
+ .chip.sm{font-size:.78rem;padding:3px 9px;color:var(--dim)}
+ button.st{padding:.4rem .9rem;font-size:.85rem;border-radius:99px;background:var(--chip)}
+ button.st.cur{background:var(--acc);color:var(--onacc);font-weight:600}
+ button.st.hid{border:1px dashed #44444c}
+ button.sm{padding:.2rem .7rem;font-size:.75rem;border-radius:99px;text-transform:none;letter-spacing:0}
+ button.pl{display:inline-flex;align-items:center;gap:8px;padding:.45rem .95rem;font-size:.9rem;border-radius:99px;background:var(--chip)}
+ button.pl .box{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--dim);display:inline-flex;align-items:center;justify-content:center;font-size:11px;line-height:1;font-weight:700}
+ button.pl.in{background:#1e2c4d;color:#cfdcff} button.pl.in .box{background:var(--acc);border-color:var(--acc);color:var(--onacc)}
+ .plr{margin-top:2px}
+ .thr{display:flex;gap:12px;align-items:center;flex-wrap:wrap} .thr .txt{min-width:0;flex:1}
+ .ic{display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;background:#26262c;padding:0;flex:none}
+ .ic svg{width:26px;height:26px} .ic.on{background:var(--acc);color:var(--onacc)} .ic.down svg{transform:rotate(180deg)} .ic.heart.on{background:#e0507a;color:#fff}
+ a.lnk{display:inline-flex;align-items:center;padding:.5rem 1rem;border-radius:.6rem;background:#2a2a30;color:var(--fg);font-size:.9rem}
+ a.lnk:hover{background:#383840}
+ .foot{font-size:.72rem;color:var(--dim);opacity:.75;margin-top:30px}
+ #toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#2a2a30;color:var(--fg);padding:9px 16px;border-radius:99px;font-size:.88rem;display:none;max-width:90vw;box-shadow:0 4px 18px #0008;z-index:5}
+ #toast.err{background:#3a2326;color:#ffb4b4}
+</style>
+</head>
+<body>
+<div id="mini"><div class="in"><img id="mimg" alt=""><div class="x" id="mtxt"><div class="n" id="mt"></div><div class="m" id="ma"></div></div><button class="ctl big" id="mpp" title="Pause"></button><button class="ctl" id="msk" title="Skip"></button></div></div>
+<main>
+ <div id="note"></div>
+
+ <section id="np">
+  <div id="flow" title="Click the cover to pause or play. Click anywhere else here for the list of songs played"><div class="artsrc" id="artsrc"></div></div>
+  <div id="meta">
+   <div id="title">Waiting for a track...</div>
+   <div id="artist"></div>
+   <div id="albumline"><span id="album"></span><span id="year"></span></div>
+  </div>
+  <div class="progress">
+   <span class="t" id="el">0:00</span>
+   <div class="track"><div id="fill"></div></div>
+   <button class="t" id="du" title="Click to switch between the song's length and the time left"></button>
+  </div>
+  <div class="ctrls">
+   <button class="ctl big" id="pp" title="Pause"></button>
+   <button class="ctl" id="sk" title="Skip"></button>
+   <button class="ctl" id="hb" title="Songs played so far"></button>
+  </div>
+  <button id="more" title="Details"></button>
+ </section>
+ <div id="below">
+
+ <h2 class="rv" style="margin-top:8px">Track details</h2><div class="rv svc" id="det"></div>
+ <h2 class="rv">Pandora stations<i>from Pandora</i> <button class="sm" id="seeall" title="Opens Pandora's own See all list and reads every station from it">See all</button></h2><div class="rv wrap" id="stl"></div>
+ <h2 class="rv">Spotify playlists<i id="plsub"></i></h2><div class="rv svc" id="pl"></div>
+ <h2 class="rv">Pandora thumbs</h2><div class="rv svc" id="th"></div>
+ <h2 class="rv">Last.fm scrobbles</h2><div class="rv svc" id="lf"></div>
+ <h2 class="rv">Accounts</h2><div class="rv svc" id="acc"></div>
+ <h2 class="rv">Similar artists<i id="simsrc">from Pandora</i></h2><div class="rv wrap" id="sim"></div>
+ <div class="foot">Release dates, genres and producer credits: <a href="https://musicbrainz.org" target="_blank" rel="noopener" style="color:inherit">MusicBrainz</a>, then <a href="https://www.wikipedia.org" target="_blank" rel="noopener" style="color:inherit">Wikipedia</a> where MusicBrainz has no date or producer. Genre is the album's genre when MusicBrainz has one.</div>
+ </div>
+ <div id="toast"></div>
+</main>
+<div id="hist"><div id="histbox"><div id="histhead"><span>Played this session</span><button id="hclose" title="Close"></button></div><div id="histlist"></div></div></div>
+
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const NS='http://www.w3.org/2000/svg';
+// icons: [path, style]  (fill = solid shape, line = outline only)
+const I={
+ play:['M8 5v14l11-7z','fill'],
+ pause:['M6 5h4v14H6zM14 5h4v14h-4z','fill'],
+ skip:['M6 18l8.5-6L6 6v12zM16 6h2v12h-2z','fill'],
+ list:['M4 6h16M4 12h16M4 18h10','line'],
+ down:['M5 9l7 7 7-7','line'],
+ close:['M6 6l12 12M18 6L6 18','line'],
+ thumb:['M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z','dual'],
+ heart:['M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z','dual']
+};
+function icon(name,filled){const d=I[name];const s=document.createElementNS(NS,'svg');s.setAttribute('viewBox','0 0 24 24');
+ const p=document.createElementNS(NS,'path');p.setAttribute('d',d[0]);
+ if(d[1]==='fill'||(d[1]==='dual'&&filled)){p.setAttribute('fill','currentColor');p.setAttribute('stroke','none');}
+ else if(d[1]==='line'){s.setAttribute('class','line');p.setAttribute('fill','none');p.setAttribute('stroke','currentColor');p.setAttribute('stroke-width','2');p.setAttribute('stroke-linecap','round');p.setAttribute('stroke-linejoin','round');}
+ else if(d[1]==='dual'){p.setAttribute('fill','none');p.setAttribute('stroke','currentColor');p.setAttribute('stroke-width','1.8');p.setAttribute('stroke-linejoin','round');}
+ s.append(p);return s;}
+function div(cls,text){const d=document.createElement('div');if(cls)d.className=cls;if(text!=null)d.textContent=text;return d;}
+function span(cls,text){const d=document.createElement('span');if(cls)d.className=cls;if(text!=null)d.textContent=text;return d;}
+let toastTimer=null;
+function toast(msg,err){const t=$('toast');t.textContent=msg;t.className=err?'err':'';t.style.display='block';clearTimeout(toastTimer);toastTimer=setTimeout(()=>{t.style.display='none';},err?7000:2500);}
+const seen={};
+// Re-draw a part of the page only when what it shows has changed (a redraw every second would eat clicks).
+function render(id,model,build){const j=JSON.stringify(model);if(seen[id]===j)return;seen[id]=j;const el=$(id);el.replaceChildren();build(el);}
+function post(url,obj){return fetch(url,{method:'POST',body:JSON.stringify(obj)}).then(r=>r.json());}
+const mmss=s=>{s=Math.max(0,Math.floor(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
+function fullDate(r){if(!r)return null;const m=/^(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?/.exec(r);if(!m)return r;
+ return (m[2]||'??')+'/'+(m[3]||'??')+'/'+m[1];}   // MM/DD/YYYY; ?? where the source does not know the month or day
+
+// ----- remembered choice: show total length or time left (only a convenience, so a failure is ignored) -----
+let showLeft=false;try{showLeft=localStorage.getItem('np.showLeft')==='1';}catch(e){}
+$('du').onclick=()=>{showLeft=!showLeft;try{localStorage.setItem('np.showLeft',showLeft?'1':'0');}catch(e){}tick();};
+
+// ----- state shared by the pieces -----
+let latest=null, cur={elapsed:0,dur:0,playing:false,at:0,ad:false};
+const busy={}; let flash={tid:null,up:false,down:false,t:0}; let loveBusy=false;
+
+// ----- controls -----
+async function cmd(c,extra){try{await post('/cmd',Object.assign({cmd:c},extra||{}));}catch(e){toast('Could not reach the receiver',true);}poll();}
+$('pp').onclick=()=>cmd('toggle'); $('sk').onclick=()=>cmd('skip'); $('mpp').onclick=()=>cmd('toggle'); $('msk').onclick=()=>cmd('skip');
+$('sk').append(icon('skip')); $('msk').append(icon('skip')); $('hb').append(icon('list')); $('more').append(icon('down')); $('hclose').append(icon('close'));
+$('seeall').onclick=()=>cmd('stations_all');
+let ppState=null;
+function setPP(playing){if(ppState===playing)return;ppState=playing;for(const id of ['pp','mpp']){const b=$(id);b.replaceChildren(icon(playing?'pause':'play'));b.title=playing?'Pause':'Play';}syncOv();}
+
+// ----- progress (runs 4x a second from the last known position) -----
+function tick(){const e=cur.elapsed+(cur.playing?(Date.now()-cur.at)/1000:0);const sh=cur.dur?Math.min(e,cur.dur):e;
+ $('el').textContent=mmss(sh);
+ $('fill').style.width=(cur.dur?Math.min(100,e/cur.dur*100):0)+'%';
+ const du=$('du');du.disabled=!cur.dur;du.textContent=cur.dur?(showLeft?'-'+mmss(cur.dur-sh):mmss(cur.dur)):'';}
+
+// ----- Now Playing -----
+function setArt(img,u){if(u){if(img.getAttribute('src')!==u)img.src=u;img.style.visibility='visible';}else{img.removeAttribute('src');img.style.visibility='hidden';}}
+function drawNow(s){const t=s.track,real=t&&!s.ad;
+ $('title').textContent=s.ad?'Ad playing on Pandora':(t?t.title:'Waiting for a track...');
+ $('artist').textContent=real?(t.artist||''):'';
+ $('album').textContent=real?(t.album||''):'';
+ $('year').textContent=real&&t.year?t.year:'';
+ $('artsrc').textContent=real&&t.art?'Cover: Spotify':'';
+ $('mt').textContent=s.ad?'Ad playing on Pandora':(t?t.title:'');$('ma').textContent=real?(t.artist||''):'';setArt($('mimg'),real?t.art:null);
+ if(real&&t.art)applyTheme(t.art);
+ setPP(!!s.playing);
+ cur={elapsed:s.elapsed,dur:real&&t.durationSec||0,playing:s.playing,at:Date.now(),ad:!!s.ad};tick();
+ const note=$('note'),lc=s.lastCmd||{};
+ if(lc.ok===false&&Date.now()/1000-lc.t<10){note.style.display='block';note.textContent='Pandora could not '+(lc.cmd==='station'?'switch station':lc.cmd)+': '+(lc.reason||'');}else note.style.display='none';}
+
+// ----- scrolling: the player fades back as you scroll, a slim player bar slides in, sections rise into view -----
+const calm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+let sTick=false;
+function onScroll(){if(sTick)return;sTick=true;requestAnimationFrame(()=>{sTick=false;const vh=innerHeight||800;const p=Math.max(0,Math.min(1,scrollY/(vh*0.8)));
+ const np=$('np');if(!calm){np.style.opacity=p>0?String(1-p*0.9):'';np.style.transform=p>0?'translateY('+(-p*36)+'px) scale('+(1-p*0.04)+')':'';}
+ $('mini').classList.toggle('show',scrollY>vh*0.7);});}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+$('mimg').onclick=$('mtxt').onclick=()=>scrollTo({top:0,behavior:'smooth'});
+if('IntersectionObserver' in window){document.documentElement.classList.add('js');
+ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:0.08});
+ document.querySelectorAll('.rv').forEach(el=>io.observe(el));}
+
+// ----- colours from the cover: the main colour tints the page, the second colour becomes the accent -----
+const themeCache={};let themeFor=null;
+function toHsl(r,g,b){r/=255;g/=255;b/=255;const mx=Math.max(r,g,b),mn=Math.min(r,g,b),l=(mx+mn)/2;let h=0,s=0;const d=mx-mn;
+ if(d){s=d/(1-Math.abs(2*l-1));h=mx===r?((g-b)/d)%6:mx===g?(b-r)/d+2:(r-g)/d+4;h=(h*60+360)%360;}return{h,s,l};}
+const hdiff=(a,b)=>{const d=Math.abs(a-b)%360;return d>180?360-d:d;};
+async function paletteOf(url){if(themeCache[url]!==undefined)return themeCache[url];let out=null;
+ try{const img=new Image();img.crossOrigin='anonymous';img.src=url.startsWith('data:')?url:'/art?u='+encodeURIComponent(url);await img.decode();
+  const c=document.createElement('canvas');c.width=c.height=48;const x=c.getContext('2d',{willReadFrequently:true});x.drawImage(img,0,0,48,48);const d=x.getImageData(0,0,48,48).data;
+  const bins={};
+  for(let i=0;i<d.length;i+=4){if(d[i+3]<128)continue;const q=toHsl(d[i],d[i+1],d[i+2]);if(q.l<0.1||q.l>0.94)continue;
+   const w=(0.15+q.s)*(1-Math.abs(q.l-0.5)*0.8);const key=Math.floor(q.h/15)+'/'+(q.l<0.35?0:q.l<0.65?1:2);
+   const b=bins[key]||(bins[key]={w:0,r:0,g:0,b:0});b.w+=w;b.r+=d[i]*w;b.g+=d[i+1]*w;b.b+=d[i+2]*w;}
+  const list=Object.values(bins).filter(b=>b.w>0).map(b=>Object.assign({w:b.w},toHsl(b.r/b.w,b.g/b.w,b.b/b.w))).sort((a,b)=>b.w-a.w);
+  if(list.length){const P=list[0];const S=list.find(b=>b!==P&&b.w>=P.w*0.18&&b.s>0.18&&(hdiff(b.h,P.h)>=35||(Math.abs(b.l-P.l)>=0.25&&hdiff(b.h,P.h)>=12)))||null;out={P,S};}
+ }catch(e){out=null;}
+ themeCache[url]=out;return out;}
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+function setTheme(pal){const r=document.documentElement.style;
+ if(!pal){['--bg','--card','--line','--acc','--onacc','--glow'].forEach(k=>r.removeProperty(k));return;}
+ const P=pal.P,S=pal.S,col=P.s>0.12;
+ r.setProperty('--bg',`hsl(${P.h} ${col?clamp(P.s*0.55,0,0.5)*100:0}% 7.5%)`);
+ r.setProperty('--card',`hsl(${P.h} ${col?clamp(P.s*0.45,0,0.4)*100:0}% 11.5%)`);
+ r.setProperty('--line',`hsl(${P.h} ${col?clamp(P.s*0.4,0,0.35)*100:0}% 18%)`);
+ r.setProperty('--glow',`hsl(${P.h} ${col?clamp(P.s,0.25,0.9)*100:0}% ${col?38:30}% / .55)`);
+ let acc;if(S)acc=`hsl(${S.h} ${clamp(S.s,0.45,0.95)*100}% ${clamp(S.l,0.58,0.74)*100}%)`;
+ else if(col)acc=`hsl(${P.h} ${clamp(P.s,0.5,0.95)*100}% 68%)`;else acc='#7aa2ff';
+ r.setProperty('--acc',acc);r.setProperty('--onacc','#0b1020');}
+async function applyTheme(url){if(!url||url===themeFor)return;themeFor=url;const pal=await paletteOf(url);if(themeFor===url)setTheme(pal);}
+
+// ----- cover flow: the current cover in front, the last two behind it on the left (Pandora does not say what is coming) -----
+const covers={}; // key -> element
+function mkCover(it){const el=div('cv enter');el.dataset.art=it.art||'';
+ const mk=()=>{if(it.art){const f=document.createElement('img');f.alt='';f.src=it.art;return f;}return div('ph',it.ad?'Ad':'no cover');};
+ const face=mk();face.classList.add('face');const rf=div('rf');rf.append(mk());
+ const ov=div('ov');const b=div('ovb');ov.append(b);el.append(face,rf,ov);return el;}
+function syncOv(){document.querySelectorAll('.cv .ovb').forEach(b=>{const st=ppState?'pause':'play';if(b.dataset.state!==st){b.dataset.state=st;b.replaceChildren(icon(st));}});}
+function drawFlow(s){const past=(s.history||[]).slice(0,3).reverse();
+ const items=past.map(h=>({k:h.tid,art:h.art,title:h.title}));
+ if(s.ad)items.push({k:'ad-'+(past.length?past[past.length-1].k:'0'),art:null,ad:true});
+ else if(s.track)items.push({k:s.track.tid,art:s.track.art,title:s.track.title});
+ const flow=$('flow');const keep=items.slice(-4);const keys=new Set(keep.map(i=>i.k));
+ keep.forEach(it=>{let el=covers[it.k];
+  if(el&&el.dataset.art!==(it.art||'')){el.remove();delete covers[it.k];el=null;}   // cover art arrived late: swap it in
+  if(!el){el=covers[it.k]=mkCover(it);flow.append(el);void el.offsetWidth;}
+ });
+ keep.forEach((it,i)=>{const pos=keep.length-1-i;const el=covers[it.k];el.classList.remove('enter','p0','p1','p2','gone');el.classList.add(pos===0?'p0':pos===1?'p1':pos===2?'p2':'gone');});
+ syncOv();fitFlow();
+ Object.keys(covers).forEach(k=>{if(!keys.has(k)){const el=covers[k];delete covers[k];el.classList.remove('p0','p1','p2');el.classList.add('gone');setTimeout(()=>el.remove(),700);}});}
+
+function fitFlow(){const flow=$('flow'),c=flow.querySelector('.cv.p0');if(!c)return;const w=c.offsetWidth,half=flow.clientWidth/2;
+ // the second cover back reaches about (0.92k + 0.2) covers left of centre; keep that inside the screen
+ const k=Math.max(0.25,Math.min(1,((half-10)/w-0.2)/0.92));flow.style.setProperty('--k',k.toFixed(3));}
+addEventListener('resize',fitFlow);
+
+// ----- history list (click the cover flow or the list button) -----
+function openHist(o){$('hist').classList.toggle('open',o);}
+$('flow').onclick=e=>{if(e.target.closest('.cv.p0'))cmd('toggle');else openHist(true);};$('hb').onclick=()=>openHist(true);$('hclose').onclick=()=>openHist(false);
+$('hist').onclick=e=>{if(e.target===$('hist'))openHist(false);};
+document.addEventListener('keydown',e=>{if(e.key==='Escape')openHist(false);});
+$('more').onclick=()=>$('below').scrollIntoView({behavior:'smooth'});
+function drawHistory(s){
+ const rows=[];if(s.track||s.ad)rows.push(s.ad?{now:true,title:'Ad',artist:'Pandora',ad:true}:Object.assign({now:true},s.track));
+ (s.history||[]).forEach(h=>rows.push(h));
+ render('histlist',rows.map(r=>[r.tid||'ad',r.now,r.title,r.artist,r.album,r.year,r.station,r.genre,r.art,(r.inPlaylists||[]).length]),el=>{
+  if(!rows.length){el.append(div('empty','Songs show up here as they play.'));return;}
+  rows.forEach(r=>{const row=div('hr'+(r.now?' now':''));
+   if(r.art){const i=document.createElement('img');i.src=r.art;i.alt='';row.append(i);}else row.append(div('ph',r.ad?'Ad':''));
+   const x=div('x');x.append(div('n',r.title||'?'));
+   x.append(div('m',[r.artist,r.album,r.year,r.station,r.genre].filter(Boolean).join(' · ')));row.append(x);
+   if(r.now)row.append(span('badge','Now playing'));else if((r.inPlaylists||[]).length)row.append(span('badge','In your playlist'));
+   el.append(row);});});}
+
+// ----- Track details -----
+function kv(el,k,v,tag,ph,href){const r=div('kv');r.append(div('k',k));const b=div('v'+(ph?' ph':''));
+ if(href){const a=document.createElement('a');a.href=href;a.target='_blank';a.rel='noopener';a.textContent=v;b.append(a);}else b.textContent=v;
+ r.append(b,div('tag',tag||''));el.append(r);}
+function drawDetails(s){const t=s.track,real=t&&!s.ad;
+ render('det',{t:real?t:null,ad:!!s.ad},el=>{
+  if(!real){el.append(div('line',s.ad?'An ad is playing.':'Waiting for a track...'));return;}
+  kv(el,'Released',t.release?fullDate(t.release):'Not found on MusicBrainz or Wikipedia',t.release?(t.releaseFrom||''):'',!t.release);
+  const p=t.producer||{state:'pending',names:[]};
+  if(p.state==='done'&&p.names.length)kv(el,'Producer',p.names.join(', '),p.label||'');
+  else if(p.state==='done')kv(el,'Producer','Not credited on MusicBrainz or Wikipedia'+(p.wikiError?' (Wikipedia could not be reached)':''),'',true);
+  else if(p.state==='error')kv(el,'Producer','Lookup failed (will retry next time this song plays)','',true);
+  else kv(el,'Producer','Looking up...','',true);
+  const m=t.mixer||{state:'pending',names:[]};
+  if(m.state==='done'&&m.names.length)kv(el,'Mixed by',m.names.join(', '),'MusicBrainz'+(m.from==='release'?', album credit':''));
+  else if(m.state==='done')kv(el,'Mixed by','Not credited on MusicBrainz','',true);
+  else if(m.state==='error')kv(el,'Mixed by','Lookup failed (will retry next time this song plays)','',true);
+  else kv(el,'Mixed by','Looking up...','',true);
+  if(t.genre)kv(el,'Genre',t.genre,t.genreFrom==='album'?'MusicBrainz, album':t.genreFrom==='artist'?'MusicBrainz, artist-wide':'MusicBrainz, song',false,t.rgUrl);
+  if(t.station)kv(el,'Station',t.station+(t.mode?' ('+t.mode+')':''),'Pandora');
+  if(t.recSource)kv(el,'Picked by',t.recSource,'recommendation algorithm');
+  if(t.wikiPage)kv(el,'Wikipedia',(()=>{let x=t.wikiPage.split('/wiki/')[1]||'';try{x=decodeURIComponent(x);}catch(e){}return x.replace(/_/g,' ');})(),'',false,t.wikiPage);
+  if(t.match)kv(el,'Plays on Spotify',t.match,'',false,t.url||null);
+ });}
+
+// ----- Pandora stations -----
+function drawStations(s){const S=s.stations||{known:[],onPage:[],current:null};
+ render('stl',S,el=>{
+  if(!S.known.length){el.append(span('empty','No stations seen yet. They are picked up from the Pandora page as you listen.'));return;}
+  S.known.forEach(n=>{const b=document.createElement('button');const here=n===S.current;b.className='st'+(here?' cur':'')+(S.onPage.includes(n)?'':' hid');b.textContent=n;b.disabled=here;
+   b.title=here?'Playing now':S.onPage.includes(n)?'Switch to this station':'Not in the short list Pandora shows (dashed): the mirror finds it through See all, or goes to its address';
+   b.onclick=()=>cmd('station',{name:n});el.append(b);});});}
+
+// ----- Spotify playlists -----
+async function togglePl(pid,tid){busy[pid]=true;draw();
+ try{const r=await post('/playlist',{playlist:pid,tid:tid});toast(r.message||(r.ok?'Done':'Did not work'),!r.ok);}catch(e){toast('Could not reach the receiver',true);}
+ delete busy[pid];poll();}
+function drawPlaylists(S){const P=S.playlists;
+ render('pl',{P:P,busy:busy,ad:S.ad,tid:S.tid},el=>{
+  if(!S.tid||S.ad){el.append(div('line',S.ad?'An ad is playing, so there is nothing to add.':'Waiting for a track...'));return;}
+  if(P.state!=='ok'){el.append(div('line',P.message||'Starting...'));return;}
+  if(!P.items.length){el.append(div('line','No playlists are being watched yet (mirror_config.json).'));return;}
+  const row=div('wrap plr');
+  P.items.forEach(it=>{const b=document.createElement('button');b.className='pl'+(it.has?' in':'');
+   const box=span('box',it.has?'✓':'');b.append(box,document.createTextNode(it.name||'(unnamed)'));
+   b.disabled=!!busy[it.id]||!P.canWrite||(!it.has&&!P.hasMatch);
+   b.title=!P.canWrite?'Spotify has not allowed playlist changes yet (see the note below)':it.has?'On this playlist. Click to remove it.':(P.hasMatch?'Click to add it':'Waiting for the Spotify match');
+   b.onclick=()=>togglePl(it.id,S.tid);row.append(b);});
+  el.append(row);
+  el.append(div('sub',P.match?'Adds this Spotify version: '+P.match:'Waiting for the Spotify match before anything can be added.'));
+  if(!P.canWrite)el.append(div('warn','Playlist changes are not allowed yet. In a terminal in this folder run once: python spotify_playlists_v12.py login'));
+ });
+ $('plsub').textContent=(P.state==='ok'&&S.tid&&!S.ad)?P.items.length+' watched':'';}
+
+// ----- Pandora thumbs -----
+async function thumb(kind,tid){flash={tid:tid,up:false,down:false,t:Date.now()};flash[kind]=true;draw();
+ try{const r=await post('/cmd',{cmd:'thumbs_'+kind});if(r&&r.refused)toast(r.refused,true);}catch(e){toast('Could not reach the receiver',true);}
+ poll();}
+function sentence(T){if(!T.enabled)return null;let s=T.up?'Thumbed up':T.down?'Thumbed down':'Not thumbed';
+ if(T.source==='page')s+=' (as shown on Pandora)';else if(T.source==='history')s+=' on '+(T.station||'this station')+' (from your Thumbs folder)';return s;}
+function drawThumbs(S){const T=S.thumbs;const fresh=flash.tid===S.tid&&Date.now()-flash.t<4000;const f={up:fresh&&flash.up,down:fresh&&flash.down};
+ render('th',{T:T,f:f,ad:S.ad,tid:S.tid},el=>{
+  const row=div('thr');
+  ['up','down'].forEach(k=>{const on=k==='up'?(T.up||f.up):(T.down||f.down);
+   const b=document.createElement('button');b.className='ic '+k+(on?' on':'');b.append(icon('thumb',!!on));
+   b.disabled=!T.enabled||(k==='up'&&!!(T.up||f.up))||(k==='down'&&!!(T.down||f.down));
+   b.title=!T.enabled?'Thumbs are off during ads':k==='up'?(T.up?'Already thumbed up':'Thumbs up'):(T.down?'Already thumbed down':'Thumbs down (also skips the song)');
+   b.onclick=()=>thumb(k,S.tid);row.append(b);});
+  const txt=div('txt');
+  if(!T.enabled)txt.append(div('line',S.ad?'An ad is playing, so thumbs are off.':'Waiting for a track...'));
+  else{txt.append(div('line',sentence(T)));
+   const ups=T.others.filter(o=>o.vote==='up').map(o=>o.station),downs=T.others.filter(o=>o.vote==='down').map(o=>o.station);
+   if(ups.length)txt.append(div('sub','Also thumbed up on: '+ups.join(', ')));
+   if(downs.length)txt.append(div('sub','Also thumbed down on: '+downs.join(', ')));
+   if(T.source!=='page'&&!T.up&&!T.down)txt.append(div('sub',"Pandora's own page has not reported in for this track (is the thumbs userscript installed?)."));}
+  row.append(txt);el.append(row);});}
+
+// ----- Last.fm -----
+async function love(tid){loveBusy=true;draw();
+ try{const r=await post('/lastfm',{action:'love',tid:tid});toast(r.message||(r.ok?'Loved':'Did not work'),!r.ok);}catch(e){toast('Could not reach the receiver',true);}
+ loveBusy=false;poll();}
+function plural(n,w){return n+' '+w+(n===1?'':'s');}
+function drawLastfm(S,sc){const L=S.lastfm;
+ render('lf',{L:L,tid:S.tid,loveBusy:loveBusy,sc:sc},el=>{
+  if(L.state==='idle'){el.append(div('line',S.ad?'An ad is playing.':'Waiting for a track...'));}
+  else if(L.state==='off'){el.append(div('line',L.message));}
+  else{
+   const row=div('thr');
+   const b=document.createElement('button');b.className='ic heart'+(L.loved?' on':'');b.append(icon('heart',!!L.loved));
+   b.disabled=!!L.loved||!L.canLove||loveBusy||L.state!=='ok';
+   b.title=L.loved?'Already one of your loved tracks':!L.canLove?'Not allowed to love yet (see the note below)':'Love this track on Last.fm';
+   b.onclick=()=>love(S.tid);row.append(b);
+   const txt=div('txt');
+   if(L.state==='loading')txt.append(div('line','Asking Last.fm...'));
+   else if(L.state==='error')txt.append(div('line',L.message||'Last.fm did not answer.'));
+   else{const n=L.userPlays;
+    txt.append(div('line',!L.found?'Last.fm does not know this track under this name':n===null?'Your scrobble count is not available':n===0?'Not scrobbled by you yet':'You have scrobbled this '+plural(n,'time')));
+    txt.append(div('sub',(L.loved?'One of your loved tracks. ':'')+'The count catches up a little after the song plays.'));}
+   row.append(txt);
+   if(L.artistUrl){const a=document.createElement('a');a.className='lnk';a.href=L.artistUrl;a.target='_blank';a.rel='noopener';a.textContent='Artist on Last.fm';row.append(a);}
+   el.append(row);
+   if(!L.canLove)el.append(div('warn','To love tracks from here, run once in a terminal in this folder: python lastfm_v12.py auth'));}
+  const last=sc&&sc.last;
+  el.append(div('sub','Recording new plays from this app: '+(sc&&sc.enabled?(sc.canSend?'on':'on, but not logged in for writing (python lastfm_v12.py auth)'):'off (a scrobble detector can report plays to /scrobble; see the receiver file)')+(last&&last.message?'. Last report: '+last.message:'')));
+ });}
+
+// ----- Accounts -----
+function drawAccounts(s){const A=s.accounts||{};
+ render('acc',A,el=>{
+  [['Spotify',A.spotify],['Pandora',A.pandora],['Last.fm',A.lastfm]].forEach(([k,v])=>{if(!v)return;
+   const r=div('kv');r.append(div('k',k));const b=div('v'+(v.state==='on'?'':' ph'),v.message);
+   if(v.thumbsUrl){b.append(' ');const l=document.createElement('a');l.href=v.thumbsUrl;l.target='_blank';l.rel='noopener';l.textContent='Open recent thumbs on Pandora';b.append(l);}
+   r.append(b,div('tag',v.state==='on'?'connected':v.state==='partial'?'needs attention':'not connected'));el.append(r);});});}
+
+// ----- Similar artists -----
+function drawSimilar(s){const t=s.track,real=t&&!s.ad;
+ const from=real?t.similarFrom:null;$('simsrc').textContent=from==='saved'?'saved from an earlier play':'from Pandora';
+ render('sim',{r:real,s:real?t.similar:null,f:from,ad:!!s.ad},el=>{
+  if(real&&t.similar.length)t.similar.forEach(x=>el.append(span('chip sm',x)));
+  else el.append(span('empty',s.ad?'':'Shows up about 3 s into a track.'));});}
+
+function draw(){if(!latest)return;const s=latest;
+ drawNow(s);drawFlow(s);drawHistory(s);drawDetails(s);drawStations(s);drawAccounts(s);drawSimilar(s);
+ if(s.services){drawPlaylists(s.services);drawThumbs(s.services);drawLastfm(s.services,s.scrobbler);}}
+let polling=false;
+async function poll(){if(polling)return;polling=true;try{latest=await (await fetch('/state')).json();draw();}catch(e){}polling=false;}
+poll();setInterval(poll,1000);setInterval(tick,250);
+})();
+</script>
+</body>
+</html>

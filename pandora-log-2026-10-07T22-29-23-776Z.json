@@ -1,0 +1,860 @@
+[
+  {
+    "t": "2026-10-07T22:12:27.533Z",
+    "src": "dom",
+    "title": "Your station will be right back.",
+    "artist": null,
+    "album": null,
+    "pandoraTrackId": null,
+    "station": "As I Lay Dying Radio",
+    "mode": "My Station",
+    "elapsedSec": 0,
+    "remainingSec": 30,
+    "durationSec": 30,
+    "thumbedUp": false,
+    "playButton": "pause_button:Play",
+    "pageTitle": "As I Lay Dying Radio - Now Playing on Pandora",
+    "mediaEls": [
+      {
+        "id": "mediaelement_0",
+        "host": "delivery-cdn-cf.adswizz.com",
+        "paused": false,
+        "sec": 0
+      }
+    ],
+    "adGuess": true,
+    "sameTrackAsBefore": false
+  },
+  {
+    "t": "2026-10-07T22:12:27.534Z",
+    "src": "bar",
+    "title": "Advertisement",
+    "artist": "Your station will be right back.",
+    "album": null,
+    "pandoraTrackId": null,
+    "station": "As I Lay Dying Radio",
+    "mode": "My Station",
+    "elapsedSec": 0,
+    "remainingSec": 30,
+    "durationSec": 30,
+    "thumbedUp": false,
+    "playButton": "pause_button:Play",
+    "pageTitle": "As I Lay Dying Radio - Now Playing on Pandora",
+    "mediaEls": [
+      {
+        "id": "mediaelement_0",
+        "host": "delivery-cdn-cf.adswizz.com",
+        "paused": false,
+        "sec": 0
+      }
+    ],
+    "adGuess": true,
+    "sameTrackAsBefore": false
+  },
+  {
+    "t": "2026-10-07T22:12:58.502Z",
+    "src": "dom",
+    "title": "Mutiny",
+    "artist": "Parkway Drive",
+    "album": "Killing With A Smile",
+    "pandoraTrackId": "TRJXzghKrfwh6Vq",
+    "station": "As I Lay Dying Radio",
+    "mode": "My Station",
+    "elapsedSec": null,
+    "remainingSec": null,
+    "durationSec": null,
+    "thumbedUp": true,
+    "playButton": "pause_button:Play",
+    "pageTitle": "As I Lay Dying Radio - Now Playing on Pandora",
+    "mediaEls": [
+      {
+        "id": "mediaelement_0",
+        "host": "delivery-cdn-cf.adswizz.com",
+        "paused": true,
+        "sec": 30
+      },
+      {
+        "id": "mediaelement_1",
+        "host": "audio-sv7-t1-2-v4v6.pandora.com",
+        "paused": false,
+        "sec": 0
+      }
+    ],
+    "adGuess": false,
+    "sameTrackAsBefore": false
+  },
+  {
+    "t": "2026-10-07T22:12:58.503Z",
+    "src": "bar",
+    "title": "Mutiny",
+    "artist": "Parkway Drive",
+    "album": null,
+    "pandoraTrackId": "TRJXzghKrfwh6Vq",
+    "station": "As I Lay Dying Radio",
+    "mode": "My Station",
+    "elapsedSec": null,
+    "remainingSec": null,
+    "durationSec": null,
+    "thumbedUp": true,
+    "playButton": "pause_button:Play",
+    "pageTitle": "As I Lay Dying Radio - Now Playing on Pandora",
+    "mediaEls": [
+      {
+        "id": "mediaelement_0",
+        "host": "delivery-cdn-cf.adswizz.com",
+        "paused": true,
+        "sec": 30
+      },
+      {
+        "id": "mediaelement_1",
+        "host": "audio-sv7-t1-2-v4v6.pandora.com",
+        "paused": false,
+        "sec": 0
+      }
+    ],
+    "adGuess": false,
+    "sameTrackAsBefore": false
+  },
+  {
+    "t": "2026-10-07T22:13:01.537Z",
+    "src": "dom",
+    "title": "Polarized",
+    "artist": "As I Lay Dying",
+    "album": "Polarized/Retribution",
+    "pandoraTrackId": "TRr5gnPZz2xpdP6",
+    "station": "As I Lay Dying Radio",
+    "mode": "My Station",
+    "elapsedSec": 0,
+    "remainingSec": 0,
+    "durationSec": 0,
+    "thumbedUp": false,
+    "playButton": "play_button:Play",
+    "pageTitle": "As I Lay Dying Radio - Now Playing on Pandora",
+    "mediaEls": [
+      {
+        "id": "mediaelement_0",
+        "host": "delivery-cdn-cf.adswizz.com",
+        "paused": true,
+        "sec": 30
+      }
+    ],
+    "adGuess": false,
+    "sameTrackAsBefore": false
+  },
+  {
+    "t": "2026-10-07T22:13:01.537Z",
+    "src": "bar",
+    "title": "Polarized",
+    "artist": "As I Lay Dying",
+    "album": null,
+    "pandoraTrackId": "TRr5gnPZz2xpdP6",
+    "station": "As I Lay Dying Radio",
+    "mode": "My Station",
+    "elapsedSec": 0,
+    "remainingSec": 0,
+    "durationSec": 0,
+    "thumbedUp": false,
+    "playButton": "play_button:Play",
+    "pageTitle": "As I Lay Dying Radio - Now Playing on Pandora",
+    "mediaEls": [
+      {
+        "id": "mediaelement_0",
+        "host": "delivery-cdn-cf.adswizz.com",
+        "paused": true,
+        "sec": 30
+      }
+    ],
+    "adGuess": false,
+    "sameTrackAsBefore": false
+  },
+  {
+    "t": "2026-10-07T22:13:04.543Z",
+    "src": "related",
+    "pandoraTrackId": "TRr5gnPZz2xpdP6",
+    "similar": [
+      "August Burns Red",
+      "All That Remains",
+      "Killswitch Engage",
+      "War Of Ages",
+      "Parkway Drive",
+      "In Flames"
+    ],
+    "station": "As I Lay Dying Radio",
+    "mode": "My Station",
+    "elapsedSec": 1,
+    "remainingSec": 222,
+    "durationSec": 223,
+    "thumbedUp": false,
+    "playButton": "pause_button:Play",
+    "pageTitle": "As I Lay Dying Radio - Now Playing on Pandora",
+    "mediaEls": [
+      {
+        "id": "mediaelement_0",
+        "host": "delivery-cdn-cf.adswizz.com",
+        "paused": true,
+        "sec": 30
+      },
+      {
+        "id": "mediaelement_2",
+        "host": "audio-dc6-t1-1-v4v6.pandora.com",
+        "paused": false,
+        "sec": 3
+      }
+    ]
+  },
+  {
+    "t": "2026-10-07T22:13:07.754Z",
+    "src": "dom",
+    "title": null,
+    "station": "",
+    "mode": null,
+    "elapsedSec": 5,
+    "remainingSec": 222,
+    "durationSec": 227,
+    "thumbedUp": false,
+    "playButton": "pause_button:Play",
+    "pageTitle": "As I Lay Dying Radio - Now Playing on Pandora",
+    "mediaEls": [
+      {
+        "id": "mediaelement_0",
+        "host": "delivery-cdn-cf.adswizz.com",
+        "paused": true,
+        "sec": 30
+      },
+      {
+        "id": "mediaelement_2",
+        "host": "audio-dc6-t1-1-v4v6.pandora.com",
+        "paused": false,
+        "sec": 6
+      }
+    ],
+    "adGuess": true
+  },
+  {
+    "t": "2026-10-07T22:13:12.470Z",
+    "src": "dom",
+    "title": "Polarized",
+    "artist": "As I Lay Dying",
+    "album": "Polarized/Retribution",
+    "pandoraTrackId": "TRr5gnPZz2xpdP6",
+    "station": "As I Lay Dying Radio",
+    "mode": "My Station",
+    "elapsedSec": 9,
+    "remainingSec": 222,
+    "durationSec": null,
+    "thumbedUp": false,
+    "playButton": "pause_button:Play",
+    "pageTitle": "As I Lay Dying Radio - Now Playing on Pandora",
+    "mediaEls": [
+      {
+        "id": "mediaelement_0",
+        "host": "delivery-cdn-cf.adswizz.com",
+        "paused": true,
+        "sec": 30
+      },
+      {
+        "id": "mediaelement_2",
+        "host": "audio-dc6-t1-1-v4v6.pandora.com",
+        "paused": false,
+        "sec": 11
+      }
+    ],
+    "adGuess": false,
+    "sameTrackAsBefore": true
+  },
+  {
+    "t": "2026-10-07T22:16:44.604Z",
+    "src": "dom",
+    "title": "Become The Catalyst",
+    "artist": "All That Remains",
+    "album": "The Fall Of Ideals",
+    "pandoraTrackId": "TRww43766vbPXcK",
+    "station": "As I Lay Dying Radio",
+    "mode": "My Station",
+    "elapsedSec": 0,
+    "remainingSec": 0,
+    "durationSec": 0,
+    "thumbedUp": true,
+    "playButton": "pause_button:Play",
+    "pageTitle": "As I Lay Dying Radio - Now Playing on Pandora",
+    "mediaEls": [
+      {
+        "id": "mediaelement_0",
+        "host": "delivery-cdn-cf.adswizz.com",
+        "paused": true,
+        "sec": 30
+      },
+      {
+        "id": "mediaelement_2",
+        "host": "audio-dc6-t1-1-v4v6.pandora.com",
+        "paused": true,
+        "sec": 223
+      }
+    ],
+    "adGuess": false,
+    "sameTrackAsBefore": false
+  },
+  {
+    "t": "2026-10-07T22:16:44.604Z",
+    "src": "bar",
+    "title": "Become The Catalyst",
+    "artist": "All That Remains",
+    "album": null,
+    "pandoraTrackId": "TRww43766vbPXcK",
+    "station": "As I Lay Dying Radio",
+    "mode": "My Station",
+    "elapsedSec": 0,
+    "remainingSec": 0,
+    "durationSec": 0,
+    "thumbedUp": true,
+    "playButton": "pause_button:Play",
+    "pageTitle": "As I Lay Dying Radio - Now Playing on Pandora",
+    "mediaEls": [
+      {
+        "id": "mediaelement_0",
+        "host": "delivery-cdn-cf.adswizz.com",
+        "paused": true,
+        "sec": 30
+      },
+      {
+        "id": "mediaelement_2",
+        "host": "audio-dc6-t1-1-v4v6.pandora.com",
+        "paused": true,
+        "sec": 223
+      }
+    ],
+    "adGuess": false,
+    "sameTrackAsBefore": false
+  },
+  {
+    "t": "2026-10-07T22:16:47.612Z",
+    "src": "related",
+    "pandoraTrackId": "TRww43766vbPXcK",
+    "similar": [
+      "Killswitch Engage",
+      "As I Lay Dying",
+      "Bullet For My Valentine",
+      "Trivium",
+      "Parkway Drive",
+      "In Flames"
+    ],
+    "station": "As I Lay Dying Radio",
+    "mode": "My Station",
+    "elapsedSec": 1,
+    "remainingSec": 186,
+    "durationSec": 187,
+    "thumbedUp": true,
+    "playButton": "pause_button:Play",
+    "pageTitle": "As I Lay Dying Radio - Now Playing on Pandora",
+    "mediaEls": [
+      {
+        "id": "mediaelement_0",
+        "host": "delivery-cdn-cf.adswizz.com",
+        "paused": true,
+        "sec": 30
+      },
+      {
+        "id": "mediaelement_2",
+        "host": "audio-dc6-t1-1-v4v6.pandora.com",
+        "paused": true,
+        "sec": 223
+      },
+      {
+        "id": "mediaelement_3",
+        "host": "t1-1.p-cdn.us",
+        "paused": false,
+        "sec": 3
+      }
+    ]
+  },
+  {
+    "t": "2026-10-07T22:19:52.041Z",
+    "src": "dom",
+    "title": "Your station will be right back.",
+    "artist": null,
+    "album": null,
+    "pandoraTrackId": null,
+    "station": "As I Lay Dying Radio",
+    "mode": "My Station",
+    "elapsedSec": 0,
+    "remainingSec": 30,
+    "durationSec": 30,
+    "thumbedUp": false,
+    "playButton": "pause_button:Play",
+    "pageTitle": "As I Lay Dying Radio - Now Playing on Pandora",
+    "mediaEls": [
+      {
+        "id": "mediaelement_0",
+        "host": "delivery-cdn-cf.adswizz.com",
+        "paused": true,
+        "sec": 30
+      },
+      {
+        "id": "mediaelement_2",
+        "host": "audio-dc6-t1-1-v4v6.pandora.com",
+        "paused": true,
+        "sec": 223
+      },
+      {
+        "id": "mediaelement_3",
+        "host": "t1-1.p-cdn.us",
+        "paused": true,
+        "sec": 187
+      },
+      {
+        "id": "mediaelement_4",
+        "host": "delivery-cdn-cf.adswizz.com",
+        "paused": false,
+        "sec": 0
+      }
+    ],
+    "adGuess": true,
+    "sameTrackAsBefore": false
+  },
+  {
+    "t": "2026-10-07T22:19:52.042Z",
+    "src": "bar",
+    "title": "Advertisement",
+    "artist": "Your station will be right back.",
+    "album": null,
+    "pandoraTrackId": null,
+    "station": "As I Lay Dying Radio",
+    "mode": "My Station",
+    "elapsedSec": 0,
+    "remainingSec": 30,
+    "durationSec": 30,
+    "thumbedUp": false,
+    "playButton": "pause_button:Play",
+    "pageTitle": "As I Lay Dying Radio - Now Playing on Pandora",
+    "mediaEls": [
+      {
+        "id": "mediaelement_0",
+        "host": "delivery-cdn-cf.adswizz.com",
+        "paused": true,
+        "sec": 30
+      },
+      {
+        "id": "mediaelement_2",
+        "host": "audio-dc6-t1-1-v4v6.pandora.com",
+        "paused": true,
+        "sec": 223
+      },
+      {
+        "id": "mediaelement_3",
+        "host": "t1-1.p-cdn.us",
+        "paused": true,
+        "sec": 187
+      },
+      {
+        "id": "mediaelement_4",
+        "host": "delivery-cdn-cf.adswizz.com",
+        "paused": false,
+        "sec": 0
+      }
+    ],
+    "adGuess": true,
+    "sameTrackAsBefore": false
+  },
+  {
+    "t": "2026-10-07T22:20:47.083Z",
+    "src": "dom",
+    "title": "Crom",
+    "artist": "Austrian Death Machine",
+    "album": "Triple Brutal",
+    "pandoraTrackId": "TRl2xZjwVV259mX",
+    "station": "As I Lay Dying Radio",
+    "mode": "My Station",
+    "elapsedSec": null,
+    "remainingSec": null,
+    "durationSec": null,
+    "thumbedUp": true,
+    "playButton": "pause_button:Play",
+    "pageTitle": "As I Lay Dying Radio - Now Playing on Pandora",
+    "mediaEls": [
+      {
+        "id": "mediaelement_0",
+        "host": "delivery-cdn-cf.adswizz.com",
+        "paused": true,
+        "sec": 30
+      },
+      {
+        "id": "mediaelement_2",
+        "host": "audio-dc6-t1-1-v4v6.pandora.com",
+        "paused": true,
+        "sec": 223
+      },
+      {
+        "id": "mediaelement_3",
+        "host": "t1-1.p-cdn.us",
+        "paused": true,
+        "sec": 187
+      },
+      {
+        "id": "mediaelement_4",
+        "host": "delivery-cdn-cf.adswizz.com",
+        "paused": true,
+        "sec": 30
+      },
+      {
+        "id": "mediaelement_5",
+        "host": "t2-4.p-cdn.us",
+        "paused": false,
+        "sec": 0
+      }
+    ],
+    "adGuess": false,
+    "sameTrackAsBefore": false
+  },
+  {
+    "t": "2026-10-07T22:20:47.083Z",
+    "src": "bar",
+    "title": "Crom",
+    "artist": "Austrian Death Machine",
+    "album": null,
+    "pandoraTrackId": "TRl2xZjwVV259mX",
+    "station": "As I Lay Dying Radio",
+    "mode": "My Station",
+    "elapsedSec": null,
+    "remainingSec": null,
+    "durationSec": null,
+    "thumbedUp": true,
+    "playButton": "pause_button:Play",
+    "pageTitle": "As I Lay Dying Radio - Now Playing on Pandora",
+    "mediaEls": [
+      {
+        "id": "mediaelement_0",
+        "host": "delivery-cdn-cf.adswizz.com",
+        "paused": true,
+        "sec": 30
+      },
+      {
+        "id": "mediaelement_2",
+        "host": "audio-dc6-t1-1-v4v6.pandora.com",
+        "paused": true,
+        "sec": 223
+      },
+      {
+        "id": "mediaelement_3",
+        "host": "t1-1.p-cdn.us",
+        "paused": true,
+        "sec": 187
+      },
+      {
+        "id": "mediaelement_4",
+        "host": "delivery-cdn-cf.adswizz.com",
+        "paused": true,
+        "sec": 30
+      },
+      {
+        "id": "mediaelement_5",
+        "host": "t2-4.p-cdn.us",
+        "paused": false,
+        "sec": 0
+      }
+    ],
+    "adGuess": false,
+    "sameTrackAsBefore": false
+  },
+  {
+    "t": "2026-10-07T22:20:50.090Z",
+    "src": "related",
+    "pandoraTrackId": "TRl2xZjwVV259mX",
+    "similar": [
+      "Metalocalypse: Dethklok",
+      "As I Lay Dying",
+      "Lamb Of God",
+      "Orbit Culture",
+      "Nekrogoblikon",
+      "Amon Amarth"
+    ],
+    "station": "As I Lay Dying Radio",
+    "mode": "My Station",
+    "elapsedSec": 2,
+    "remainingSec": 241,
+    "durationSec": 243,
+    "thumbedUp": true,
+    "playButton": "pause_button:Play",
+    "pageTitle": "As I Lay Dying Radio - Now Playing on Pandora",
+    "mediaEls": [
+      {
+        "id": "mediaelement_0",
+        "host": "delivery-cdn-cf.adswizz.com",
+        "paused": true,
+        "sec": 30
+      },
+      {
+        "id": "mediaelement_2",
+        "host": "audio-dc6-t1-1-v4v6.pandora.com",
+        "paused": true,
+        "sec": 223
+      },
+      {
+        "id": "mediaelement_3",
+        "host": "t1-1.p-cdn.us",
+        "paused": true,
+        "sec": 187
+      },
+      {
+        "id": "mediaelement_4",
+        "host": "delivery-cdn-cf.adswizz.com",
+        "paused": true,
+        "sec": 30
+      },
+      {
+        "id": "mediaelement_5",
+        "host": "t2-4.p-cdn.us",
+        "paused": false,
+        "sec": 3
+      }
+    ]
+  },
+  {
+    "t": "2026-10-07T22:24:48.753Z",
+    "src": "dom",
+    "title": "Blacken the Cursed Sun",
+    "artist": "Lamb Of God",
+    "album": "Sacrament (15th Anniversary Edition)",
+    "pandoraTrackId": "TRnpz6g2V9zkgc4",
+    "station": "As I Lay Dying Radio",
+    "mode": "My Station",
+    "elapsedSec": null,
+    "remainingSec": null,
+    "durationSec": null,
+    "thumbedUp": true,
+    "playButton": "pause_button:Play",
+    "pageTitle": "As I Lay Dying Radio - Now Playing on Pandora",
+    "mediaEls": [
+      {
+        "id": "mediaelement_2",
+        "host": "audio-dc6-t1-1-v4v6.pandora.com",
+        "paused": true,
+        "sec": 223
+      },
+      {
+        "id": "mediaelement_3",
+        "host": "t1-1.p-cdn.us",
+        "paused": true,
+        "sec": 187
+      },
+      {
+        "id": "mediaelement_4",
+        "host": "delivery-cdn-cf.adswizz.com",
+        "paused": true,
+        "sec": 30
+      },
+      {
+        "id": "mediaelement_5",
+        "host": "t2-4.p-cdn.us",
+        "paused": true,
+        "sec": 241
+      },
+      {
+        "id": "mediaelement_6",
+        "host": "t1-3.p-cdn.us",
+        "paused": false,
+        "sec": 0
+      }
+    ],
+    "adGuess": false,
+    "sameTrackAsBefore": false
+  },
+  {
+    "t": "2026-10-07T22:24:48.753Z",
+    "src": "bar",
+    "title": "Blacken the Cursed Sun",
+    "artist": "Lamb Of God",
+    "album": null,
+    "pandoraTrackId": "TRnpz6g2V9zkgc4",
+    "station": "As I Lay Dying Radio",
+    "mode": "My Station",
+    "elapsedSec": null,
+    "remainingSec": null,
+    "durationSec": null,
+    "thumbedUp": true,
+    "playButton": "pause_button:Play",
+    "pageTitle": "As I Lay Dying Radio - Now Playing on Pandora",
+    "mediaEls": [
+      {
+        "id": "mediaelement_2",
+        "host": "audio-dc6-t1-1-v4v6.pandora.com",
+        "paused": true,
+        "sec": 223
+      },
+      {
+        "id": "mediaelement_3",
+        "host": "t1-1.p-cdn.us",
+        "paused": true,
+        "sec": 187
+      },
+      {
+        "id": "mediaelement_4",
+        "host": "delivery-cdn-cf.adswizz.com",
+        "paused": true,
+        "sec": 30
+      },
+      {
+        "id": "mediaelement_5",
+        "host": "t2-4.p-cdn.us",
+        "paused": true,
+        "sec": 241
+      },
+      {
+        "id": "mediaelement_6",
+        "host": "t1-3.p-cdn.us",
+        "paused": false,
+        "sec": 0
+      }
+    ],
+    "adGuess": false,
+    "sameTrackAsBefore": false
+  },
+  {
+    "t": "2026-10-07T22:24:51.755Z",
+    "src": "related",
+    "pandoraTrackId": "TRnpz6g2V9zkgc4",
+    "similar": [
+      "Upon A Burning Body",
+      "Chimaira",
+      "Devildriver",
+      "As I Lay Dying",
+      "Meshuggah",
+      "Slipknot"
+    ],
+    "station": "As I Lay Dying Radio",
+    "mode": "My Station",
+    "elapsedSec": 2,
+    "remainingSec": 328,
+    "durationSec": 330,
+    "thumbedUp": true,
+    "playButton": "pause_button:Play",
+    "pageTitle": "As I Lay Dying Radio - Now Playing on Pandora",
+    "mediaEls": [
+      {
+        "id": "mediaelement_2",
+        "host": "audio-dc6-t1-1-v4v6.pandora.com",
+        "paused": true,
+        "sec": 223
+      },
+      {
+        "id": "mediaelement_3",
+        "host": "t1-1.p-cdn.us",
+        "paused": true,
+        "sec": 187
+      },
+      {
+        "id": "mediaelement_4",
+        "host": "delivery-cdn-cf.adswizz.com",
+        "paused": true,
+        "sec": 30
+      },
+      {
+        "id": "mediaelement_5",
+        "host": "t2-4.p-cdn.us",
+        "paused": true,
+        "sec": 241
+      },
+      {
+        "id": "mediaelement_6",
+        "host": "t1-3.p-cdn.us",
+        "paused": false,
+        "sec": 3
+      }
+    ]
+  },
+  {
+    "t": "2026-10-07T22:25:55.259Z",
+    "src": "dom",
+    "title": null,
+    "station": null,
+    "mode": null,
+    "elapsedSec": 65,
+    "remainingSec": 328,
+    "durationSec": null,
+    "thumbedUp": true,
+    "playButton": "pause_button:Play",
+    "pageTitle": "Blacken the Cursed Sun by Lamb Of God on Pandora | Radio, Songs & Lyrics",
+    "mediaEls": [
+      {
+        "id": "mediaelement_2",
+        "host": "audio-dc6-t1-1-v4v6.pandora.com",
+        "paused": true,
+        "sec": 223
+      },
+      {
+        "id": "mediaelement_3",
+        "host": "t1-1.p-cdn.us",
+        "paused": true,
+        "sec": 187
+      },
+      {
+        "id": "mediaelement_4",
+        "host": "delivery-cdn-cf.adswizz.com",
+        "paused": true,
+        "sec": 30
+      },
+      {
+        "id": "mediaelement_5",
+        "host": "t2-4.p-cdn.us",
+        "paused": true,
+        "sec": 241
+      },
+      {
+        "id": "mediaelement_6",
+        "host": "t1-3.p-cdn.us",
+        "paused": false,
+        "sec": 66
+      }
+    ],
+    "adGuess": true
+  },
+  {
+    "t": "2026-10-07T22:25:57.363Z",
+    "src": "dom",
+    "title": "Blacken the Cursed Sun",
+    "artist": "Lamb Of God",
+    "album": "Sacrament (15th Anniversary Edition)",
+    "pandoraTrackId": "TRnpz6g2V9zkgc4",
+    "station": "As I Lay Dying Radio",
+    "mode": "My Station",
+    "elapsedSec": 67,
+    "remainingSec": 328,
+    "durationSec": null,
+    "thumbedUp": true,
+    "playButton": "pause_button:Play",
+    "pageTitle": "As I Lay Dying Radio - Now Playing on Pandora",
+    "mediaEls": [
+      {
+        "id": "mediaelement_2",
+        "host": "audio-dc6-t1-1-v4v6.pandora.com",
+        "paused": true,
+        "sec": 223
+      },
+      {
+        "id": "mediaelement_3",
+        "host": "t1-1.p-cdn.us",
+        "paused": true,
+        "sec": 187
+      },
+      {
+        "id": "mediaelement_4",
+        "host": "delivery-cdn-cf.adswizz.com",
+        "paused": true,
+        "sec": 30
+      },
+      {
+        "id": "mediaelement_5",
+        "host": "t2-4.p-cdn.us",
+        "paused": true,
+        "sec": 241
+      },
+      {
+        "id": "mediaelement_6",
+        "host": "t1-3.p-cdn.us",
+        "paused": false,
+        "sec": 69
+      }
+    ],
+    "adGuess": false,
+    "sameTrackAsBefore": true
+  }
+]

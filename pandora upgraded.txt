@@ -1,0 +1,3 @@
+spotify key: spak_pyrSLKCFrBi1RKW76DMeW1bXKwTzBNKZ
+client id: 46df57b71357413895754a88952a4357
+

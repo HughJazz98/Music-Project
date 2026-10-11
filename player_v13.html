@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pandora Mirror</title>
+<style>
+ /* All colours and sizes live here so the look can be changed in one place. */
+ :root{--bg:#101012;--card:#1a1a1e;--line:#2a2a30;--fg:#ececf0;--dim:#9a9aa6;--acc:#7aa2ff;--chip:#26262c;--radius:14px}
+ *{box-sizing:border-box}
+ body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,sans-serif;display:flex;justify-content:center}
+ main{width:min(820px,100%);padding:24px 16px 56px}
+ button{font:inherit;color:var(--fg);border:0;background:#2a2a30;cursor:pointer}
+ button:hover:not(:disabled){background:#383840}
+ button:disabled{opacity:.45;cursor:default}
+ a{color:var(--acc);text-decoration:none}
+ #note{display:none;margin:0 0 14px;padding:9px 12px;border-radius:9px;background:#3a2326;color:#ffb4b4;font-size:.88rem}
+
+ /* ---------- Now Playing ---------- */
+ #np{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+ #stage{display:flex;gap:22px}
+ #artbox{flex:none;width:240px}
+ #art{width:240px;height:240px;border-radius:10px;background:#26262c;object-fit:cover;display:block}
+ .artsrc{font-size:.7rem;color:var(--dim);opacity:.75;margin-top:5px;min-height:1em}
+ .info{min-width:0;flex:1;display:flex;flex-direction:column}
+ #title{font-size:1.65rem;font-weight:700;line-height:1.15;overflow-wrap:anywhere}
+ #artist{margin-top:.4rem;font-size:1.1rem}
+ #albumline{margin-top:.2rem;color:var(--dim);display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+ #year{font-size:.8rem;padding:2px 9px;border-radius:99px;background:var(--chip)}
+ #year:empty{display:none}
+ .progress{margin-top:auto;padding-top:1.1rem;display:flex;align-items:center;gap:10px;font-size:.78rem;color:var(--dim);font-variant-numeric:tabular-nums}
+ .progress .t{width:3.2em;flex:none}
+ #el{text-align:right}
+ #du{text-align:left;background:none;padding:0;color:var(--dim);font-size:.78rem;font-variant-numeric:tabular-nums;border-radius:4px}
+ #du:hover:not(:disabled){background:none;color:var(--fg)}
+ .track{flex:1;height:5px;background:#2e2e35;border-radius:9px;overflow:hidden}
+ #fill{height:100%;width:0;background:var(--acc)}
+ .ctrls{display:flex;gap:12px;align-items:center;margin-top:.9rem}
+ .ctl{width:46px;height:46px;border-radius:50%;padding:0;display:inline-flex;align-items:center;justify-content:center;background:#26262c}
+ .ctl svg{width:22px;height:22px;fill:currentColor}
+ .ctl.big{width:58px;height:58px;background:var(--acc);color:#0b1020}
+ .ctl.big:hover:not(:disabled){background:#93b3ff}
+ .ctl.big svg{width:28px;height:28px}
+
+ /* carousel */
+ #carwrap{position:relative;margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+ #car{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x proximity;padding:4px 2px 10px;scrollbar-width:thin}
+ .cc{flex:none;width:116px;scroll-snap-align:center;opacity:.6;transition:opacity .2s}
+ .cc img,.cc .ph{width:116px;height:116px;border-radius:8px;background:#26262c;object-fit:cover;display:block}
+ .cc .ph{display:flex;align-items:center;justify-content:center;color:var(--dim);font-size:.75rem}
+ .cc .n{margin-top:6px;font-size:.82rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .cc .m{font-size:.72rem;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .cc.cur{opacity:1} .cc.cur img,.cc.cur .ph{outline:2px solid var(--acc);outline-offset:2px}
+ .cc.cur .n{font-weight:600}
+ .cnav{position:absolute;top:50px;width:30px;height:30px;border-radius:50%;padding:0;display:inline-flex;align-items:center;justify-content:center;background:#000a;z-index:2}
+ .cnav svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+ #cprev{left:-6px} #cnext{right:-6px}
+ @media(max-width:600px){#stage{flex-direction:column}#artbox,#art{width:100%;height:auto}#art{aspect-ratio:1}#title{font-size:1.4rem}}
+
+ /* ---------- below the fold ---------- */
+ h2{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);margin:28px 0 8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+ h2 i{font-style:normal;text-transform:none;letter-spacing:0;opacity:.7}
+ .svc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+ .line{font-size:.9rem} .sub{color:var(--dim);font-size:.8rem;margin-top:6px} .warn{color:#ffcf99;font-size:.82rem;margin-top:8px}
+ .empty{color:var(--dim);font-size:.9rem}
+ .kv{display:flex;gap:10px;align-items:baseline;padding:7px 0;border-top:1px solid var(--line);font-size:.92rem} .kv:first-child{border-top:0}
+ .kv .k{width:120px;flex:none;color:var(--dim);font-size:.8rem} .kv .v{flex:1;min-width:0;overflow-wrap:anywhere} .kv .v.ph{color:var(--dim);font-style:italic}
+ .kv .tag{font-size:.7rem;color:var(--dim);opacity:.75;white-space:nowrap}
+ .wrap{display:flex;flex-wrap:wrap;gap:6px}
+ .chip{font-size:.85rem;padding:.4rem .9rem;border-radius:99px;background:var(--chip);color:var(--fg)}
+ .chip.sm{font-size:.78rem;padding:3px 9px;color:var(--dim)}
+ button.st{padding:.4rem .9rem;font-size:.85rem;border-radius:99px;background:var(--chip)}
+ button.st.cur{background:var(--acc);color:#0b1020;font-weight:600}
+ button.st.hid{border:1px dashed #44444c}
+ button.sm{padding:.2rem .7rem;font-size:.75rem;border-radius:99px;text-transform:none;letter-spacing:0}
+ button.pl{display:inline-flex;align-items:center;gap:8px;padding:.45rem .95rem;font-size:.9rem;border-radius:99px;background:var(--chip)}
+ button.pl .box{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--dim);display:inline-flex;align-items:center;justify-content:center;font-size:11px;line-height:1;font-weight:700}
+ button.pl.in{background:#1e2c4d;color:#cfdcff} button.pl.in .box{background:var(--acc);border-color:var(--acc);color:#0b1020}
+ .plr{margin-top:2px}
+ .thr{display:flex;gap:12px;align-items:center;flex-wrap:wrap} .thr .txt{min-width:0;flex:1}
+ .ic{display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;background:#26262c;padding:0;flex:none}
+ .ic svg{width:26px;height:26px} .ic.on{background:var(--acc);color:#0b1020} .ic.down svg{transform:rotate(180deg)} .ic.heart.on{background:#e0507a;color:#fff}
+ a.lnk{display:inline-flex;align-items:center;padding:.5rem 1rem;border-radius:.6rem;background:#2a2a30;color:var(--fg);font-size:.9rem}
+ a.lnk:hover{background:#383840}
+ .foot{font-size:.72rem;color:var(--dim);opacity:.75;margin-top:30px}
+ #toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#2a2a30;color:var(--fg);padding:9px 16px;border-radius:99px;font-size:.88rem;display:none;max-width:90vw;box-shadow:0 4px 18px #0008;z-index:5}
+ #toast.err{background:#3a2326;color:#ffb4b4}
+</style>
+</head>
+<body>
+<main>
+ <div id="note"></div>
+
+ <section id="np">
+  <div id="stage">
+   <div id="artbox"><img id="art" alt=""><div class="artsrc" id="artsrc"></div></div>
+   <div class="info">
+    <div id="title">Waiting for a track...</div>
+    <div id="artist"></div>
+    <div id="albumline"><span id="album"></span><span id="year"></span></div>
+    <div class="progress">
+     <span class="t" id="el">0:00</span>
+     <div class="track"><div id="fill"></div></div>
+     <button class="t" id="du" title="Click to switch between the song's length and the time left"></button>
+    </div>
+    <div class="ctrls">
+     <button class="ctl big" id="pp" title="Pause"></button>
+     <button class="ctl" id="sk" title="Skip"></button>
+    </div>
+   </div>
+  </div>
+  <div id="carwrap">
+   <button class="cnav" id="cprev" title="Earlier songs"></button>
+   <div id="car"></div>
+   <button class="cnav" id="cnext" title="Back to now"></button>
+  </div>
+ </section>
+
+ <h2>Track details</h2><div class="svc" id="det"></div>
+ <h2>Pandora stations<i>from Pandora</i> <button class="sm" id="seeall" title="Opens Pandora's own See all list and reads every station from it">See all</button></h2><div class="wrap" id="stl"></div>
+ <h2>Spotify playlists<i id="plsub"></i></h2><div class="svc" id="pl"></div>
+ <h2>Pandora thumbs</h2><div class="svc" id="th"></div>
+ <h2>Last.fm scrobbles</h2><div class="svc" id="lf"></div>
+ <h2>Accounts</h2><div class="svc" id="acc"></div>
+ <h2>Similar artists<i>from Pandora</i></h2><div class="wrap" id="sim"></div>
+ <div class="foot">Release dates, genres and producer credits: <a href="https://musicbrainz.org" target="_blank" rel="noopener" style="color:inherit">MusicBrainz</a>. Genre is the album's genre when MusicBrainz has one.</div>
+ <div id="toast"></div>
+</main>
+
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const NS='http://www.w3.org/2000/svg';
+// icons: [path, style]  (fill = solid shape, line = outline only)
+const I={
+ play:['M8 5v14l11-7z','fill'],
+ pause:['M6 5h4v14H6zM14 5h4v14h-4z','fill'],
+ skip:['M6 18l8.5-6L6 6v12zM16 6h2v12h-2z','fill'],
+ left:['M15 5l-7 7 7 7','line'],
+ right:['M9 5l7 7-7 7','line'],
+ thumb:['M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z','dual'],
+ heart:['M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z','dual']
+};
+function icon(name,filled){const d=I[name];const s=document.createElementNS(NS,'svg');s.setAttribute('viewBox','0 0 24 24');
+ const p=document.createElementNS(NS,'path');p.setAttribute('d',d[0]);
+ if(d[1]==='fill'||(d[1]==='dual'&&filled)){p.setAttribute('fill','currentColor');p.setAttribute('stroke','none');}
+ else if(d[1]==='dual'){p.setAttribute('fill','none');p.setAttribute('stroke','currentColor');p.setAttribute('stroke-width','1.8');p.setAttribute('stroke-linejoin','round');}
+ s.append(p);return s;}
+function div(cls,text){const d=document.createElement('div');if(cls)d.className=cls;if(text!=null)d.textContent=text;return d;}
+function span(cls,text){const d=document.createElement('span');if(cls)d.className=cls;if(text!=null)d.textContent=text;return d;}
+let toastTimer=null;
+function toast(msg,err){const t=$('toast');t.textContent=msg;t.className=err?'err':'';t.style.display='block';clearTimeout(toastTimer);toastTimer=setTimeout(()=>{t.style.display='none';},err?7000:2500);}
+const seen={};
+// Re-draw a part of the page only when what it shows has changed (a redraw every second would eat clicks).
+function render(id,model,build){const j=JSON.stringify(model);if(seen[id]===j)return;seen[id]=j;const el=$(id);el.replaceChildren();build(el);}
+function post(url,obj){return fetch(url,{method:'POST',body:JSON.stringify(obj)}).then(r=>r.json());}
+const mmss=s=>{s=Math.max(0,Math.floor(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
+const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+function fullDate(r){if(!r)return null;const m=/^(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?/.exec(r);if(!m)return r;
+ const y=m[1],mo=m[2]?MONTHS[+m[2]-1]:null,d=m[3]?+m[3]:null;
+ if(mo&&d)return d+' '+mo+' '+y;if(mo)return mo+' '+y+' (day not on MusicBrainz)';return y+' (month and day not on MusicBrainz)';}
+
+// ----- remembered choice: show total length or time left (only a convenience, so a failure is ignored) -----
+let showLeft=false;try{showLeft=localStorage.getItem('np.showLeft')==='1';}catch(e){}
+$('du').onclick=()=>{showLeft=!showLeft;try{localStorage.setItem('np.showLeft',showLeft?'1':'0');}catch(e){}tick();};
+
+// ----- state shared by the pieces -----
+let latest=null, cur={elapsed:0,dur:0,playing:false,at:0,ad:false};
+const busy={}; let flash={tid:null,up:false,down:false,t:0}; let loveBusy=false;
+
+// ----- controls -----
+async function cmd(c,extra){try{await post('/cmd',Object.assign({cmd:c},extra||{}));}catch(e){toast('Could not reach the receiver',true);}poll();}
+$('pp').onclick=()=>cmd('toggle'); $('sk').onclick=()=>cmd('skip');
+$('sk').append(icon('skip')); $('cprev').append(icon('left')); $('cnext').append(icon('right'));
+$('seeall').onclick=()=>cmd('stations_all');
+let ppState=null;
+function setPP(playing){if(ppState===playing)return;ppState=playing;const b=$('pp');b.replaceChildren(icon(playing?'pause':'play'));b.title=playing?'Pause':'Play';}
+
+// ----- progress (runs 4x a second from the last known position) -----
+function tick(){const e=cur.elapsed+(cur.playing?(Date.now()-cur.at)/1000:0);const sh=cur.dur?Math.min(e,cur.dur):e;
+ $('el').textContent=mmss(sh);
+ $('fill').style.width=(cur.dur?Math.min(100,e/cur.dur*100):0)+'%';
+ const du=$('du');du.disabled=!cur.dur;du.textContent=cur.dur?(showLeft?'-'+mmss(cur.dur-sh):mmss(cur.dur)):'';}
+
+// ----- Now Playing -----
+function setArt(img,u){if(u){if(img.getAttribute('src')!==u)img.src=u;img.style.visibility='visible';}else{img.removeAttribute('src');img.style.visibility='hidden';}}
+function drawNow(s){const t=s.track,real=t&&!s.ad;
+ $('title').textContent=s.ad?'Ad playing on Pandora':(t?t.title:'Waiting for a track...');
+ $('artist').textContent=real?(t.artist||''):'';
+ $('album').textContent=real?(t.album||''):'';
+ $('year').textContent=real&&t.year?t.year:'';
+ setArt($('art'),real?t.art:null);$('artsrc').textContent=real&&t.art?'Cover: Spotify':'';
+ setPP(!!s.playing);
+ cur={elapsed:s.elapsed,dur:real&&t.durationSec||0,playing:s.playing,at:Date.now(),ad:!!s.ad};tick();
+ const note=$('note'),lc=s.lastCmd||{};
+ if(lc.ok===false&&Date.now()/1000-lc.t<10){note.style.display='block';note.textContent='Pandora could not '+(lc.cmd==='station'?'switch station':lc.cmd)+': '+(lc.reason||'');}else note.style.display='none';}
+
+// ----- carousel: older songs on the left, the current one last -----
+let lastCurKey=null;
+function drawCarousel(s){
+ const past=(s.history||[]).slice().reverse();
+ const items=past.map(h=>({k:h.tid,title:h.title,artist:h.artist,art:h.art,cur:false}));
+ const t=s.track;
+ if(s.ad)items.push({k:'ad',title:'Ad',artist:'Pandora',art:null,cur:true,ad:true});
+ else if(t)items.push({k:t.tid,title:t.title,artist:t.artist,art:t.art,cur:true});
+ const car=$('car');
+ render('car',items,el=>{
+  if(!items.length){el.append(div('empty','Songs show up here as they play.'));return;}
+  items.forEach(it=>{const c=div('cc'+(it.cur?' cur':''));
+   if(it.art){const i=document.createElement('img');i.src=it.art;i.alt='';c.append(i);}else c.append(div('ph',it.ad?'Ad':'no cover'));
+   c.append(div('n',it.title||'?'),div('m',it.artist||''));c.title=(it.title||'')+(it.artist?' - '+it.artist:'');
+   if(it.cur)c.id='cc-cur';el.append(c);});
+ });
+ const key=items.length?items[items.length-1].k:null;
+ if(key!==lastCurKey){lastCurKey=key;goNow(true);}}
+function goNow(smooth){const car=$('car'),c=$('cc-cur');if(!c)return;
+ car.scrollTo({left:Math.max(0,c.offsetLeft-(car.clientWidth-c.clientWidth)/2),behavior:smooth?'smooth':'auto'});}
+$('cprev').onclick=()=>$('car').scrollBy({left:-$('car').clientWidth*0.8,behavior:'smooth'});
+$('cnext').onclick=()=>goNow(true);
+
+// ----- Track details -----
+function kv(el,k,v,tag,ph,href){const r=div('kv');r.append(div('k',k));const b=div('v'+(ph?' ph':''));
+ if(href){const a=document.createElement('a');a.href=href;a.target='_blank';a.rel='noopener';a.textContent=v;b.append(a);}else b.textContent=v;
+ r.append(b,div('tag',tag||''));el.append(r);}
+function drawDetails(s){const t=s.track,real=t&&!s.ad;
+ render('det',{t:real?t:null,ad:!!s.ad},el=>{
+  if(!real){el.append(div('line',s.ad?'An ad is playing.':'Waiting for a track...'));return;}
+  kv(el,'Released',t.release?fullDate(t.release):'Not found',t.release?'MusicBrainz':'',!t.release);
+  const p=t.producer||{state:'pending',names:[]};
+  if(p.state==='done'&&p.names.length)kv(el,'Producer',p.names.join(', '),'MusicBrainz'+(p.from==='release'?', album credits':''));
+  else if(p.state==='done')kv(el,'Producer','Not credited on MusicBrainz','',true);
+  else if(p.state==='error')kv(el,'Producer','Lookup failed (will retry next time this song plays)','',true);
+  else kv(el,'Producer','Looking up...','',true);
+  if(t.genre)kv(el,'Genre',t.genre,t.genreFrom==='album'?'MusicBrainz, album':t.genreFrom==='artist'?'MusicBrainz, artist-wide':'MusicBrainz, song',false,t.rgUrl);
+  if(t.station)kv(el,'Station',t.station+(t.mode?' ('+t.mode+')':''),'Pandora');
+  if(t.recSource)kv(el,'Picked by',t.recSource,'recommendation algorithm');
+  if(t.match)kv(el,'Plays on Spotify',t.match,'',false,t.url||null);
+ });}
+
+// ----- Pandora stations -----
+function drawStations(s){const S=s.stations||{known:[],onPage:[],current:null};
+ render('stl',S,el=>{
+  if(!S.known.length){el.append(span('empty','No stations seen yet. They are picked up from the Pandora page as you listen.'));return;}
+  S.known.forEach(n=>{const b=document.createElement('button');const here=n===S.current;b.className='st'+(here?' cur':'')+(S.onPage.includes(n)?'':' hid');b.textContent=n;b.disabled=here;
+   b.title=here?'Playing now':S.onPage.includes(n)?'Switch to this station':'Not in the short list Pandora shows (dashed): the mirror finds it through See all, or goes to its address';
+   b.onclick=()=>cmd('station',{name:n});el.append(b);});});}
+
+// ----- Spotify playlists -----
+async function togglePl(pid,tid){busy[pid]=true;draw();
+ try{const r=await post('/playlist',{playlist:pid,tid:tid});toast(r.message||(r.ok?'Done':'Did not work'),!r.ok);}catch(e){toast('Could not reach the receiver',true);}
+ delete busy[pid];poll();}
+function drawPlaylists(S){const P=S.playlists;
+ render('pl',{P:P,busy:busy,ad:S.ad,tid:S.tid},el=>{
+  if(!S.tid||S.ad){el.append(div('line',S.ad?'An ad is playing, so there is nothing to add.':'Waiting for a track...'));return;}
+  if(P.state!=='ok'){el.append(div('line',P.message||'Starting...'));return;}
+  if(!P.items.length){el.append(div('line','No playlists are being watched yet (mirror_config.json).'));return;}
+  const row=div('wrap plr');
+  P.items.forEach(it=>{const b=document.createElement('button');b.className='pl'+(it.has?' in':'');
+   const box=span('box',it.has?'✓':'');b.append(box,document.createTextNode(it.name||'(unnamed)'));
+   b.disabled=!!busy[it.id]||!P.canWrite||(!it.has&&!P.hasMatch);
+   b.title=!P.canWrite?'Spotify has not allowed playlist changes yet (see the note below)':it.has?'On this playlist. Click to remove it.':(P.hasMatch?'Click to add it':'Waiting for the Spotify match');
+   b.onclick=()=>togglePl(it.id,S.tid);row.append(b);});
+  el.append(row);
+  el.append(div('sub',P.match?'Adds this Spotify version: '+P.match:'Waiting for the Spotify match before anything can be added.'));
+  if(!P.canWrite)el.append(div('warn','Playlist changes are not allowed yet. In a terminal in this folder run once: python spotify_playlists_v12.py login'));
+ });
+ $('plsub').textContent=(P.state==='ok'&&S.tid&&!S.ad)?P.items.length+' watched':'';}
+
+// ----- Pandora thumbs -----
+async function thumb(kind,tid){flash={tid:tid,up:false,down:false,t:Date.now()};flash[kind]=true;draw();
+ try{const r=await post('/cmd',{cmd:'thumbs_'+kind});if(r&&r.refused)toast(r.refused,true);}catch(e){toast('Could not reach the receiver',true);}
+ poll();}
+function sentence(T){if(!T.enabled)return null;let s=T.up?'Thumbed up':T.down?'Thumbed down':'Not thumbed';
+ if(T.source==='page')s+=' (as shown on Pandora)';else if(T.source==='history')s+=' on '+(T.station||'this station')+' (from your Thumbs folder)';return s;}
+function drawThumbs(S){const T=S.thumbs;const fresh=flash.tid===S.tid&&Date.now()-flash.t<4000;const f={up:fresh&&flash.up,down:fresh&&flash.down};
+ render('th',{T:T,f:f,ad:S.ad,tid:S.tid},el=>{
+  const row=div('thr');
+  ['up','down'].forEach(k=>{const on=k==='up'?(T.up||f.up):(T.down||f.down);
+   const b=document.createElement('button');b.className='ic '+k+(on?' on':'');b.append(icon('thumb',!!on));
+   b.disabled=!T.enabled||(k==='up'&&!!(T.up||f.up))||(k==='down'&&!!(T.down||f.down));
+   b.title=!T.enabled?'Thumbs are off during ads':k==='up'?(T.up?'Already thumbed up':'Thumbs up'):(T.down?'Already thumbed down':'Thumbs down (also skips the song)');
+   b.onclick=()=>thumb(k,S.tid);row.append(b);});
+  const txt=div('txt');
+  if(!T.enabled)txt.append(div('line',S.ad?'An ad is playing, so thumbs are off.':'Waiting for a track...'));
+  else{txt.append(div('line',sentence(T)));
+   const ups=T.others.filter(o=>o.vote==='up').map(o=>o.station),downs=T.others.filter(o=>o.vote==='down').map(o=>o.station);
+   if(ups.length)txt.append(div('sub','Also thumbed up on: '+ups.join(', ')));
+   if(downs.length)txt.append(div('sub','Also thumbed down on: '+downs.join(', ')));
+   if(T.source!=='page'&&!T.up&&!T.down)txt.append(div('sub',"Pandora's own page has not reported in for this track (is the thumbs userscript installed?)."));}
+  row.append(txt);el.append(row);});}
+
+// ----- Last.fm -----
+async function love(tid){loveBusy=true;draw();
+ try{const r=await post('/lastfm',{action:'love',tid:tid});toast(r.message||(r.ok?'Loved':'Did not work'),!r.ok);}catch(e){toast('Could not reach the receiver',true);}
+ loveBusy=false;poll();}
+function plural(n,w){return n+' '+w+(n===1?'':'s');}
+function drawLastfm(S,sc){const L=S.lastfm;
+ render('lf',{L:L,tid:S.tid,loveBusy:loveBusy,sc:sc},el=>{
+  if(L.state==='idle'){el.append(div('line',S.ad?'An ad is playing.':'Waiting for a track...'));}
+  else if(L.state==='off'){el.append(div('line',L.message));}
+  else{
+   const row=div('thr');
+   const b=document.createElement('button');b.className='ic heart'+(L.loved?' on':'');b.append(icon('heart',!!L.loved));
+   b.disabled=!!L.loved||!L.canLove||loveBusy||L.state!=='ok';
+   b.title=L.loved?'Already one of your loved tracks':!L.canLove?'Not allowed to love yet (see the note below)':'Love this track on Last.fm';
+   b.onclick=()=>love(S.tid);row.append(b);
+   const txt=div('txt');
+   if(L.state==='loading')txt.append(div('line','Asking Last.fm...'));
+   else if(L.state==='error')txt.append(div('line',L.message||'Last.fm did not answer.'));
+   else{const n=L.userPlays;
+    txt.append(div('line',!L.found?'Last.fm does not know this track under this name':n===null?'Your scrobble count is not available':n===0?'Not scrobbled by you yet':'You have scrobbled this '+plural(n,'time')));
+    txt.append(div('sub',(L.loved?'One of your loved tracks. ':'')+'The count catches up a little after the song plays.'));}
+   row.append(txt);
+   if(L.artistUrl){const a=document.createElement('a');a.className='lnk';a.href=L.artistUrl;a.target='_blank';a.rel='noopener';a.textContent='Artist on Last.fm';row.append(a);}
+   el.append(row);
+   if(!L.canLove)el.append(div('warn','To love tracks from here, run once in a terminal in this folder: python lastfm_v12.py auth'));}
+  const last=sc&&sc.last;
+  el.append(div('sub','Recording new plays from this app: '+(sc&&sc.enabled?(sc.canSend?'on':'on, but not logged in for writing (python lastfm_v12.py auth)'):'off (a scrobble detector can report plays to /scrobble; see the receiver file)')+(last&&last.message?'. Last report: '+last.message:'')));
+ });}
+
+// ----- Accounts -----
+function drawAccounts(s){const A=s.accounts||{};
+ render('acc',A,el=>{
+  [['Spotify',A.spotify],['Pandora',A.pandora],['Last.fm',A.lastfm]].forEach(([k,v])=>{if(!v)return;
+   const r=div('kv');r.append(div('k',k));const b=div('v'+(v.state==='on'?'':' ph'),v.message);
+   if(v.thumbsUrl){b.append(' ');const l=document.createElement('a');l.href=v.thumbsUrl;l.target='_blank';l.rel='noopener';l.textContent='Open recent thumbs on Pandora';b.append(l);}
+   r.append(b,div('tag',v.state==='on'?'connected':v.state==='partial'?'needs attention':'not connected'));el.append(r);});});}
+
+// ----- Similar artists -----
+function drawSimilar(s){const t=s.track,real=t&&!s.ad;
+ render('sim',{r:real,s:real?t.similar:null,ad:!!s.ad},el=>{
+  if(real&&t.similar.length)t.similar.forEach(x=>el.append(span('chip sm',x)));
+  else el.append(span('empty',s.ad?'':'Shows up about 3 s into a track.'));});}
+
+function draw(){if(!latest)return;const s=latest;
+ drawNow(s);drawCarousel(s);drawDetails(s);drawStations(s);drawAccounts(s);drawSimilar(s);
+ if(s.services){drawPlaylists(s.services);drawThumbs(s.services);drawLastfm(s.services,s.scrobbler);}}
+let polling=false;
+async function poll(){if(polling)return;polling=true;try{latest=await (await fetch('/state')).json();draw();}catch(e){}polling=false;}
+poll();setInterval(poll,1000);setInterval(tick,250);
+})();
+</script>
+</body>
+</html>

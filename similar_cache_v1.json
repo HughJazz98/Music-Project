@@ -1,0 +1,326 @@
+{
+ "all that remains": {
+  "artist": "All That Remains",
+  "names": [
+   "Killswitch Engage",
+   "As I Lay Dying",
+   "Bullet For My Valentine",
+   "Trivium",
+   "Parkway Drive",
+   "In Flames"
+  ],
+  "t": "2026-10-11T11:18:54"
+ },
+ "suicide silence": {
+  "artist": "Suicide Silence",
+  "names": [
+   "Whitechapel",
+   "Chelsea Grin",
+   "Lorna Shore",
+   "Signs Of The Swarm",
+   "Paleface Swiss",
+   "Angelmaker"
+  ],
+  "t": "2026-10-11T11:21:19"
+ },
+ "austrian death machine": {
+  "artist": "Austrian Death Machine",
+  "names": [
+   "Metalocalypse: Dethklok",
+   "As I Lay Dying",
+   "Orbit Culture",
+   "Lamb Of God",
+   "Nekrogoblikon",
+   "Amon Amarth"
+  ],
+  "t": "2026-10-11T11:25:54"
+ },
+ "lamb of god": {
+  "artist": "Lamb Of God",
+  "names": [
+   "Upon A Burning Body",
+   "Chimaira",
+   "Devildriver",
+   "Slipknot",
+   "As I Lay Dying",
+   "Meshuggah"
+  ],
+  "t": "2026-10-11T11:28:44"
+ },
+ "bullet for my valentine": {
+  "artist": "Bullet For My Valentine",
+  "names": [
+   "All That Remains",
+   "Killswitch Engage",
+   "Atreyu",
+   "Parkway Drive",
+   "Avenged Sevenfold",
+   "Trivium"
+  ],
+  "t": "2026-10-11T11:33:16"
+ },
+ "trivium": {
+  "artist": "Trivium",
+  "names": [
+   "In Flames",
+   "As I Lay Dying",
+   "All That Remains",
+   "Killswitch Engage",
+   "Shadows Fall",
+   "Light The Torch"
+  ],
+  "t": "2026-10-11T11:36:57"
+ },
+ "parkway drive": {
+  "artist": "Parkway Drive",
+  "names": [
+   "As I Lay Dying",
+   "August Burns Red",
+   "Upon A Burning Body",
+   "All That Remains",
+   "After The Burial",
+   "Killswitch Engage"
+  ],
+  "t": "2026-10-11T11:40:45"
+ },
+ "unearth": {
+  "artist": "Unearth",
+  "names": [
+   "As I Lay Dying",
+   "August Burns Red",
+   "War Of Ages",
+   "Killswitch Engage",
+   "Parkway Drive",
+   "Bleeding Through"
+  ],
+  "t": "2026-10-11T11:45:02"
+ },
+ "bring me the horizon": {
+  "artist": "Bring Me The Horizon",
+  "names": [
+   "I Prevail",
+   "Asking Alexandria",
+   "Pierce The Veil",
+   "Beartooth",
+   "The Amity Affliction",
+   "Architects"
+  ],
+  "t": "2026-10-11T11:48:47"
+ },
+ "the devil wears prada": {
+  "artist": "The Devil Wears Prada",
+  "names": [
+   "We Came As Romans",
+   "Miss May I",
+   "Of Mice & Men",
+   "August Burns Red",
+   "Fit For A King",
+   "The Amity Affliction"
+  ],
+  "t": "2026-10-11T11:53:22"
+ },
+ "metallica": {
+  "artist": "Metallica",
+  "names": [
+   "Ozzy Osbourne",
+   "Godsmack",
+   "Megadeth",
+   "Five Finger Death Punch",
+   "Disturbed",
+   "Pantera"
+  ],
+  "t": "2026-10-11T12:02:10"
+ },
+ "the browning": {
+  "artist": "The Browning",
+  "names": [
+   "Born Of Osiris",
+   "Lorna Shore",
+   "Varials",
+   "Make Them Suffer",
+   "Beyond All Recognition",
+   "Slaughter to Prevail"
+  ],
+  "t": "2026-10-11T12:11:28"
+ },
+ "war of ages": {
+  "artist": "War Of Ages",
+  "names": [
+   "Phinehas",
+   "August Burns Red",
+   "For Today",
+   "As I Lay Dying",
+   "Fit For A King",
+   "Sleeping Giant"
+  ],
+  "t": "2026-10-11T12:14:11"
+ },
+ "left to suffer": {
+  "artist": "Left to Suffer",
+  "names": [
+   "Filth",
+   "Paleface Swiss",
+   "Spite",
+   "Make Them Suffer",
+   "Chelsea Grin",
+   "Brand of Sacrifice"
+  ],
+  "t": "2026-10-11T12:18:56"
+ },
+ "chimaira": {
+  "artist": "Chimaira",
+  "names": [
+   "Lamb Of God",
+   "Devildriver",
+   "Upon A Burning Body",
+   "Throwdown",
+   "Fear Factory",
+   "As I Lay Dying"
+  ],
+  "t": "2026-10-11T12:23:37"
+ },
+ "winds of plague": {
+  "artist": "Winds Of Plague",
+  "names": [
+   "All Shall Perish",
+   "Whitechapel",
+   "Angelmaker",
+   "Born Of Osiris",
+   "Lorna Shore",
+   "Suicide Silence"
+  ],
+  "t": "2026-10-11T12:27:58"
+ },
+ "august burns red": {
+  "artist": "August Burns Red",
+  "names": [
+   "Phinehas",
+   "As I Lay Dying",
+   "After The Burial",
+   "Fit For A King",
+   "ERRA",
+   "Born Of Osiris"
+  ],
+  "t": "2026-10-11T12:37:55"
+ },
+ "within the ruins": {
+  "artist": "Within The Ruins",
+  "names": [
+   "After The Burial",
+   "Born Of Osiris",
+   "Veil Of Maya",
+   "Berried Alive",
+   "The Browning",
+   "Thy Art Is Murder"
+  ],
+  "t": "2026-10-11T12:42:40"
+ },
+ "shadows fall": {
+  "artist": "Shadows Fall",
+  "names": [
+   "Killswitch Engage",
+   "As I Lay Dying",
+   "Trivium",
+   "In Flames",
+   "All That Remains",
+   "Lamb Of God"
+  ],
+  "t": "2026-10-11T13:28:24"
+ },
+ "breakdown of sanity": {
+  "artist": "Breakdown of Sanity",
+  "names": [
+   "Make Them Suffer",
+   "Currents",
+   "After The Burial",
+   "Feed Her To The Sharks",
+   "The Browning",
+   "Left to Suffer"
+  ],
+  "t": "2026-10-11T13:34:42"
+ },
+ "device": {
+  "artist": "Device",
+  "names": [
+   "Disturbed",
+   "Five Finger Death Punch",
+   "Korn",
+   "Volbeat",
+   "Godsmack",
+   "Avenged Sevenfold"
+  ],
+  "t": "2026-10-11T13:39:47"
+ },
+ "taproot": {
+  "artist": "Taproot",
+  "names": [
+   "Sevendust",
+   "Earshot",
+   "Chevelle",
+   "Flaw",
+   "Nonpoint",
+   "Cold"
+  ],
+  "t": "2026-10-11T13:44:40"
+ },
+ "upon a burning body": {
+  "artist": "Upon A Burning Body",
+  "names": [
+   "Attila",
+   "Gideon",
+   "Fit For A King",
+   "After The Burial",
+   "Emmure",
+   "KING 810"
+  ],
+  "t": "2026-10-11T13:53:08"
+ },
+ "after the burial": {
+  "artist": "After The Burial",
+  "names": [
+   "Within The Ruins",
+   "Born Of Osiris",
+   "Make Them Suffer",
+   "August Burns Red",
+   "Gideon",
+   "Upon A Burning Body"
+  ],
+  "t": "2026-10-11T13:57:37"
+ },
+ "emmure": {
+  "artist": "Emmure",
+  "names": [
+   "Attila",
+   "Chelsea Grin",
+   "The Acacia Strain",
+   "Filth",
+   "Paleface Swiss",
+   "Suicide Silence"
+  ],
+  "t": "2026-10-11T14:02:25"
+ },
+ "as i lay dying": {
+  "artist": "As I Lay Dying",
+  "names": [
+   "August Burns Red",
+   "All That Remains",
+   "Killswitch Engage",
+   "War Of Ages",
+   "Parkway Drive",
+   "In Flames"
+  ],
+  "t": "2026-10-11T14:16:08"
+ },
+ "her last sight & the curse within": {
+  "artist": "Her Last Sight & The Curse Within",
+  "names": [
+   "Her Last Sight",
+   "Dreamwake",
+   "LANDMVRKS",
+   "Miss May I",
+   "The Amity Affliction",
+   "Make Them Suffer"
+  ],
+  "t": "2026-10-11T14:32:49"
+ }
+}

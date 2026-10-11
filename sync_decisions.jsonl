@@ -1,0 +1,157 @@
+{"t": "2026-10-08T16:57:34.917", "msg": "PAUSE from spotify (Spotify reported this twice in a row)"}
+{"t": "2026-10-08T16:57:43.473", "msg": "PAUSE from gui"}
+{"t": "2026-10-08T16:57:45.161", "msg": "PLAY from gui"}
+{"t": "2026-10-08T16:57:50.062", "msg": "PAUSE from pandora (was held back during a track change)"}
+{"t": "2026-10-08T16:58:05.459", "msg": "PLAY from pandora (Pandora's button)"}
+{"t": "2026-10-08T17:05:58.887", "msg": "PAUSE from spotify (Spotify reported this twice in a row)"}
+{"t": "2026-10-08T17:06:19.066", "msg": "PAUSE from pandora (Pandora's button)"}
+{"t": "2026-10-08T17:06:19.090", "msg": "ignored Pandora play: track change in progress (will recheck)"}
+{"t": "2026-10-08T17:08:51.307", "msg": "PAUSE from spotify (Spotify reported this twice in a row)"}
+{"t": "2026-10-08T17:08:57.308", "msg": "PLAY from pandora (was held back during a track change)"}
+{"t": "2026-10-08T17:09:07.017", "msg": "PAUSE from spotify (Spotify reported this twice in a row)"}
+{"t": "2026-10-08T17:21:56.301", "msg": "BASELINE Pandora was 5989 ms ahead when Spotify started this track"}
+{"t": "2026-10-08T17:25:56.693", "msg": "PAUSE from pandora (Pandora's audio element, +20.4s after track start, position 184899 ms)"}
+{"t": "2026-10-08T18:09:55.247", "msg": "ignored Pandora play: a track just changed (rechecking in 4.5s)"}
+{"t": "2026-10-08T18:26:44.087", "msg": "-> Pandora command: skip"}
+{"t": "2026-10-08T18:26:49.191", "msg": "PAUSE from gui"}
+{"t": "2026-10-08T18:26:49.341", "msg": "-> Pandora command: pause"}
+{"t": "2026-10-08T18:26:58.064", "msg": "PLAY from gui"}
+{"t": "2026-10-08T18:26:58.186", "msg": "-> Pandora command: play"}
+{"t": "2026-10-08T18:35:43.036", "msg": "PAUSE from gui"}
+{"t": "2026-10-08T18:35:43.212", "msg": "-> Pandora command: pause"}
+{"t": "2026-10-08T18:37:47.973", "msg": "PLAY from pandora (Pandora's audio element)"}
+{"t": "2026-10-08T18:41:25.309", "msg": "PAUSE from pandora (Pandora's audio element)"}
+{"t": "2026-10-08T18:45:50.320", "msg": "PAUSE from gui"}
+{"t": "2026-10-08T18:45:50.525", "msg": "-> Pandora command: pause"}
+{"t": "2026-10-08T18:45:57.473", "msg": "PLAY from gui"}
+{"t": "2026-10-08T18:45:57.680", "msg": "-> Pandora command: play"}
+{"t": "2026-10-08T18:58:28.428", "msg": "PAUSE from pandora (Pandora's audio element)"}
+{"t": "2026-10-08T19:01:13.678", "msg": "PAUSE from pandora (Pandora's audio element)"}
+{"t": "2026-10-08T19:01:20.669", "msg": "PLAY from pandora (Pandora's audio element)"}
+{"t": "2026-10-08T19:02:57.496", "msg": "-> Pandora command: skip"}
+{"t": "2026-10-08T19:02:58.424", "msg": "PAUSE from pandora (Pandora's audio element)"}
+{"t": "2026-10-08T19:02:59.424", "msg": "ignored Pandora play: a track just changed (rechecking in 3.8s)"}
+{"t": "2026-10-08T19:11:54.769", "msg": "PAUSE from gui"}
+{"t": "2026-10-08T19:11:54.916", "msg": "-> Pandora command: pause"}
+{"t": "2026-10-08T19:11:57.961", "msg": "PLAY from gui"}
+{"t": "2026-10-08T19:11:58.104", "msg": "-> Pandora command: play"}
+{"t": "2026-10-08T19:30:31.040", "msg": "PAUSE from gui"}
+{"t": "2026-10-08T19:30:31.184", "msg": "-> Pandora command: pause"}
+{"t": "2026-10-08T19:39:46.587", "msg": "PAUSE from gui"}
+{"t": "2026-10-08T19:39:46.758", "msg": "-> Pandora command: pause"}
+{"t": "2026-10-08T19:39:47.726", "msg": "ignored Pandora pause: a track just changed (rechecking in 1.3s)"}
+{"t": "2026-10-08T19:45:28.454", "msg": "ignored Pandora play: a track just changed (rechecking in 3.7s)"}
+{"t": "2026-10-08T19:49:21.143", "msg": "-> Pandora command: station:As I Lay Dying Radio"}
+{"t": "2026-10-08T19:49:22.307", "msg": "ignored Pandora pause: a track just changed (rechecking in 4.5s)"}
+{"t": "2026-10-08T19:49:26.695", "msg": "ignored Pandora play: a track just changed (rechecking in 3.8s)"}
+{"t": "2026-10-08T21:29:49.104", "msg": "ignored Pandora play: a track just changed (rechecking in 3.8s)"}
+{"t": "2026-10-08T21:30:11.063", "msg": "-> Pandora command: stations_all"}
+{"t": "2026-10-08T21:50:34.411", "msg": "-> Pandora command: skip"}
+{"t": "2026-10-08T21:50:35.581", "msg": "ignored Pandora pause: a track just changed (rechecking in 4.5s)"}
+{"t": "2026-10-08T21:50:36.235", "msg": "ignored Pandora play: a track just changed (rechecking in 3.8s)"}
+{"t": "2026-10-08T21:50:40.981", "msg": "-> Pandora command: stations_all"}
+{"t": "2026-10-08T21:50:54.320", "msg": "-> Pandora command: stations_all"}
+{"t": "2026-10-08T22:00:29.137", "msg": "-> Pandora command: station:The Devil Wears Prada Radio"}
+{"t": "2026-10-08T22:00:36.993", "msg": "-> Pandora command: stations_all"}
+{"t": "2026-10-08T22:00:43.387", "msg": "-> Pandora command: station:The Devil Wears Prada Radio"}
+{"t": "2026-10-08T22:00:47.387", "msg": "-> Pandora command: stations_all"}
+{"t": "2026-10-08T22:07:00.511", "msg": "-> Pandora command: skip"}
+{"t": "2026-10-08T22:07:01.528", "msg": "PAUSE from pandora (Pandora's audio element)"}
+{"t": "2026-10-08T22:07:02.573", "msg": "PLAY from pandora (Pandora's audio element)"}
+{"t": "2026-10-08T22:07:32.565", "msg": "PAUSE from pandora (Pandora's audio element)"}
+{"t": "2026-10-08T22:07:34.319", "msg": "ignored Pandora play: a track just changed (rechecking in 4.0s)"}
+{"t": "2026-10-08T22:16:24.812", "msg": "PAUSE from gui"}
+{"t": "2026-10-08T22:16:24.954", "msg": "-> Pandora command: pause"}
+{"t": "2026-10-10T20:24:04.345", "msg": "ignored Pandora play: a track just changed (rechecking in 3.9s)"}
+{"t": "2026-10-10T20:37:24.423", "msg": "PAUSE from gui"}
+{"t": "2026-10-10T20:37:24.554", "msg": "-> Pandora command: pause"}
+{"t": "2026-10-10T20:57:05.835", "msg": "PLAY from gui"}
+{"t": "2026-10-10T20:57:05.964", "msg": "-> Pandora command: play"}
+{"t": "2026-10-10T20:59:20.350", "msg": "PAUSE from gui"}
+{"t": "2026-10-10T20:59:20.509", "msg": "-> Pandora command: pause"}
+{"t": "2026-10-10T21:01:39.009", "msg": "PAUSE from gui"}
+{"t": "2026-10-10T21:01:39.216", "msg": "-> Pandora command: pause"}
+{"t": "2026-10-10T21:01:39.912", "msg": "PLAY from gui"}
+{"t": "2026-10-10T21:01:40.040", "msg": "-> Pandora command: play"}
+{"t": "2026-10-10T21:22:09.873", "msg": "ignored Pandora pause: a track just changed (rechecking in 3.6s)"}
+{"t": "2026-10-10T21:22:13.497", "msg": "PAUSE from pandora (was held back during a track change and is still true)"}
+{"t": "2026-10-10T21:22:56.051", "msg": "PLAY from gui"}
+{"t": "2026-10-10T21:22:56.284", "msg": "-> Pandora command: play"}
+{"t": "2026-10-10T21:22:58.795", "msg": "PAUSE from gui"}
+{"t": "2026-10-10T21:22:58.926", "msg": "-> Pandora command: pause"}
+{"t": "2026-10-10T21:22:59.811", "msg": "PLAY from gui"}
+{"t": "2026-10-10T21:22:59.943", "msg": "-> Pandora command: play"}
+{"t": "2026-10-10T21:23:01.035", "msg": "PAUSE from gui"}
+{"t": "2026-10-10T21:23:01.172", "msg": "-> Pandora command: pause"}
+{"t": "2026-10-10T21:23:06.616", "msg": "PLAY from pandora (Pandora's audio element)"}
+{"t": "2026-10-10T21:31:13.291", "msg": "ignored Pandora pause: a track just changed (rechecking in 3.5s)"}
+{"t": "2026-10-10T21:31:16.830", "msg": "PAUSE from pandora (was held back during a track change and is still true)"}
+{"t": "2026-10-10T21:31:48.648", "msg": "PLAY from gui"}
+{"t": "2026-10-10T21:31:48.797", "msg": "-> Pandora command: play"}
+{"t": "2026-10-10T21:53:21.097", "msg": "PAUSE from gui"}
+{"t": "2026-10-10T21:53:21.226", "msg": "-> Pandora command: pause"}
+{"t": "2026-10-10T21:59:19.967", "msg": "ignored Pandora play: a track just changed (rechecking in 3.8s)"}
+{"t": "2026-10-10T22:02:38.091", "msg": "-> Pandora command: stations_all"}
+{"t": "2026-10-10T22:05:09.623", "msg": "-> Pandora command: thumbs_up"}
+{"t": "2026-10-10T22:05:55.851", "msg": "-> Pandora command: stations_all"}
+{"t": "2026-10-10T22:38:13.153", "msg": "PAUSE from gui"}
+{"t": "2026-10-10T22:38:13.277", "msg": "-> Pandora command: pause"}
+{"t": "2026-10-11T10:09:49.157", "msg": "ignored Pandora pause: a track just changed (rechecking in 3.6s)"}
+{"t": "2026-10-11T10:09:50.640", "msg": "ignored Pandora play: a track just changed (rechecking in 4.1s)"}
+{"t": "2026-10-11T10:21:27.255", "msg": "-> Pandora command: station:Trapped Under Ice Radio@@/station/2717767215456857137"}
+{"t": "2026-10-11T10:21:28.748", "msg": "ignored Pandora pause: a track just changed (rechecking in 3.6s)"}
+{"t": "2026-10-11T10:21:30.492", "msg": "ignored Pandora play: a track just changed (rechecking in 4.0s)"}
+{"t": "2026-10-11T10:21:51.065", "msg": "-> Pandora command: station:Decapitated Radio@@/station/3270398054682995761"}
+{"t": "2026-10-11T10:21:55.002", "msg": "-> Pandora command: station:Decapitated Radio@@/station/3270398054682995761"}
+{"t": "2026-10-11T10:23:43.299", "msg": "-> Pandora command: stations_all"}
+{"t": "2026-10-11T10:23:49.131", "msg": "-> Pandora command: station:Eminem Radio@@/station/839027204540214321"}
+{"t": "2026-10-11T10:23:58.907", "msg": "-> Pandora command: station:Dr. Dre Radio@@/station/2122268505217838129"}
+{"t": "2026-10-11T10:24:09.396", "msg": "PAUSE from gui"}
+{"t": "2026-10-11T10:24:09.559", "msg": "-> Pandora command: pause"}
+{"t": "2026-10-11T10:25:15.696", "msg": "PLAY from pandora (Pandora's audio element)"}
+{"t": "2026-10-11T10:25:45.738", "msg": "PAUSE from pandora (Pandora's audio element)"}
+{"t": "2026-10-11T10:25:47.475", "msg": "ignored Pandora play: a track just changed (rechecking in 3.9s)"}
+{"t": "2026-10-11T10:29:48.676", "msg": "PAUSE from pandora (Pandora's audio element)"}
+{"t": "2026-10-11T10:29:49.667", "msg": "ignored Pandora play: a track just changed (rechecking in 3.9s)"}
+{"t": "2026-10-11T10:49:18.849", "msg": "PAUSE from gui"}
+{"t": "2026-10-11T10:49:18.998", "msg": "-> Pandora command: pause"}
+{"t": "2026-10-11T10:53:40.485", "msg": "PAUSE from gui"}
+{"t": "2026-10-11T10:53:40.653", "msg": "-> Pandora command: pause"}
+{"t": "2026-10-11T10:53:47.223", "msg": "-> Pandora command: station:Decapitated Radio@@/station/3270398054682995761"}
+{"t": "2026-10-11T10:53:50.966", "msg": "-> Pandora command: stations_all"}
+{"t": "2026-10-11T10:53:54.134", "msg": "-> Pandora command: station:Decapitated Radio@@/station/3270398054682995761"}
+{"t": "2026-10-11T10:54:14.591", "msg": "PLAY from gui"}
+{"t": "2026-10-11T10:54:14.730", "msg": "-> Pandora command: play"}
+{"t": "2026-10-11T10:56:00.824", "msg": "-> Pandora command: station:Black Crown Initiate Radio@@/station/2902465764260981809"}
+{"t": "2026-10-11T11:23:47.185", "msg": "-> Pandora command: stations_all"}
+{"t": "2026-10-11T11:23:49.881", "msg": "-> Pandora command: station:Black Crown Initiate Radio@@/station/2902465764260981809"}
+{"t": "2026-10-11T11:30:04.663", "msg": "-> Pandora command: thumbs_up"}
+{"t": "2026-10-11T12:12:17.866", "msg": "-> Pandora command: thumbs_up"}
+{"t": "2026-10-11T12:17:30.569", "msg": "PAUSE from gui"}
+{"t": "2026-10-11T12:17:30.831", "msg": "-> Pandora command: pause"}
+{"t": "2026-10-11T12:17:31.506", "msg": "PLAY from gui"}
+{"t": "2026-10-11T12:17:31.581", "msg": "PAUSE from pandora (Pandora's audio element)"}
+{"t": "2026-10-11T12:17:31.670", "msg": "-> Pandora command: play"}
+{"t": "2026-10-11T12:17:32.642", "msg": "PLAY from pandora (Pandora's audio element)"}
+{"t": "2026-10-11T12:18:52.867", "msg": "PAUSE from pandora (Pandora's audio element)"}
+{"t": "2026-10-11T12:18:53.863", "msg": "ignored Pandora play: a track just changed (rechecking in 4.0s)"}
+{"t": "2026-10-11T12:40:27.115", "msg": "PAUSE from gui"}
+{"t": "2026-10-11T12:40:27.288", "msg": "-> Pandora command: pause"}
+{"t": "2026-10-11T12:42:38.346", "msg": "ignored Pandora play: a track just changed (rechecking in 4.0s)"}
+{"t": "2026-10-11T12:43:14.545", "msg": "PAUSE from gui"}
+{"t": "2026-10-11T12:43:14.681", "msg": "-> Pandora command: pause"}
+{"t": "2026-10-11T13:28:22.187", "msg": "ignored Pandora play: a track just changed (rechecking in 3.8s)"}
+{"t": "2026-10-11T13:48:06.239", "msg": "-> Pandora command: thumbs_up"}
+{"t": "2026-10-11T14:02:57.160", "msg": "PAUSE from gui"}
+{"t": "2026-10-11T14:02:57.378", "msg": "-> Pandora command: pause"}
+{"t": "2026-10-11T14:02:57.898", "msg": "PLAY from gui"}
+{"t": "2026-10-11T14:02:58.024", "msg": "-> Pandora command: play"}
+{"t": "2026-10-11T14:02:58.199", "msg": "PAUSE from pandora (Pandora's audio element)"}
+{"t": "2026-10-11T14:02:58.915", "msg": "PLAY from pandora (Pandora's audio element)"}
+{"t": "2026-10-11T14:11:14.639", "msg": "PAUSE from pandora (Pandora's audio element)"}
+{"t": "2026-10-11T14:11:16.433", "msg": "ignored Pandora play: a track just changed (rechecking in 4.0s)"}
+{"t": "2026-10-11T14:28:33.250", "msg": "PAUSE from gui"}
+{"t": "2026-10-11T14:28:33.359", "msg": "-> Pandora command: pause"}
+{"t": "2026-10-11T14:32:46.467", "msg": "ignored Pandora pause: a track just changed (rechecking in 4.5s)"}
+{"t": "2026-10-11T14:32:47.139", "msg": "ignored Pandora play: a track just changed (rechecking in 3.8s)"}
+{"t": "2026-10-11T14:36:55.588", "msg": "PAUSE from pandora (Pandora's audio element)"}
